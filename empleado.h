@@ -1,7 +1,7 @@
 #define MAX_RELACIONES 50
 
-#ifndef REL_LABORAL
-#define REL_LABORAL
+#ifndef EMPLEADO
+#define EMPLEADO
 
 #include <iostream>
 #include "./DataTypes/direccion.h"
