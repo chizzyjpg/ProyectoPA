@@ -1,11 +1,10 @@
 #include "empleado.h"
 
-Empleado::Empleado(string Ci, string Nom, string Ape, Direccion Dir){
+Empleado::Empleado(string Ci, string Nom, string Ape, Direccion * Dir){
     this->ci = Ci;
     this->nombre = Nom;
     this->apellido = Ape;
     this->direccion = Dir;
-    this->Relaciones = NULL;
 };
 
 void Empleado::setNom(string Nom){
@@ -20,12 +19,12 @@ void Empleado::setCi(string Ci){
     this->ci = Ci;
 };
 
-void Empleado::setDir(Direccion Dir){
+void Empleado::setDir(Direccion* Dir){
     this->direccion = Dir;
 };
 
-void Empleado::agregarRel(relacionLaboral *Rel){
-    this->Relaciones = Rel;
+void Empleado::agregarRel(RelacionLaboral *Rel){
+    this->Relaciones[0] = Rel; // Hay que arreglar esto para que permita añadirlo a un arreglo
 };
 
 string Empleado::getNom(){
@@ -40,8 +39,8 @@ string Empleado::getCi(){
     return this->ci;
 };
 
-Direccion Empleado::getDir(){
-    return this->direccion;//(esto si ser asi)
+Direccion* Empleado::getDir(){
+    return this->direccion;
 };
 
 Empleado::~Empleado(){

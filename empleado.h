@@ -13,16 +13,16 @@ class RelacionLaboral;
 
 class Empleado {
 	public:
-		Empleado(string Ci, string Nom, string Ape, Direccion Dir);
+		Empleado(string Ci, string Nom, string Ape, Direccion* Dir);
 		void setNom(string Nom);
 		void setApe(string Ape);
 		void setCi(string Ci);
-		void setDir(Direccion Dir);
+		void setDir(Direccion* Dir);
 		void agregarRel(RelacionLaboral *Rel);
 		string getNom();
 		string getApe();
 		string getCi();
-		Direccion getDir();
+		Direccion* getDir();
 		~Empleado();
 	private:
 		string ci;
