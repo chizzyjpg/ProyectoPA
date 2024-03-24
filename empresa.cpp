@@ -4,7 +4,7 @@ Empresa::Empresa(){
     this->id="NULL";
     this->dir;
 };
-
+ 
 Empresa::Empresa(string Id, Direccion Dir){
     this->id=Id;
     this->dir=Dir;
