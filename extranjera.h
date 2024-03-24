@@ -1,5 +1,5 @@
-#ifndef NACIONAL_H
-#define NACIONAL_H
+#ifndef EXTRANJERA_H
+#define EXTRANJERA_H
 
 #include "empresa.h"
 
