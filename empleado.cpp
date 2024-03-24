@@ -1,5 +1,5 @@
 #include "empleado.h"
-
+// Constructor: 
 Empleado::Empleado(string Ci, string Nom, string Ape, Direccion * Dir){
     this->ci = Ci;
     this->nombre = Nom;
@@ -8,6 +8,14 @@ Empleado::Empleado(string Ci, string Nom, string Ape, Direccion * Dir){
     this->Relaciones[0] = NULL; // Hay que arreglar esto para que permita añadirlo a un arreglo
 };
 
+
+// Funcionalidad:
+void Empleado::agregarRel(RelacionLaboral *Rel){
+    this->Relaciones[0] = Rel; // Hay que arreglar esto para que permita añadirlo a un arreglo
+};
+
+
+//Setters:
 void Empleado::setNom(string Nom){
     this->nombre = Nom;
 };
@@ -24,10 +32,8 @@ void Empleado::setDir(Direccion* Dir){
     this->direccion = Dir;
 };
 
-void Empleado::agregarRel(RelacionLaboral *Rel){
-    this->Relaciones[0] = Rel; // Hay que arreglar esto para que permita añadirlo a un arreglo
-};
 
+// Getters:
 string Empleado::getNom(){
     return this->nombre;
 };
@@ -44,6 +50,8 @@ Direccion* Empleado::getDir(){
     return this->direccion;
 };
 
+
+// Destructor:
 Empleado::~Empleado(){
     cout<< "Le dio deprecion...";
 };
