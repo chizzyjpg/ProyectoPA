@@ -4,14 +4,11 @@
 #include "empleado.h"
 #include "./DataTypes/Fecha.h"
 
-class Empresa;
-class Empleado;
-class Fecha;
-
 class RelacionLaboral {
     public:
-        RelacionLaboral (float, Fecha);
+        RelacionLaboral (float, Fecha*);
         float getSueldoLiquido ();
+        ~RelacionLaboral();
     private:
         float sueldo;
         Fecha * fechaDesvinculación;
