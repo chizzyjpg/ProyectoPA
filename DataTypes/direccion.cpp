@@ -1,10 +1,8 @@
-<<<<<<< Updated upstream
+
 #include <iostream>
 #include "direccion.h"
 
 using namespace std;
-=======
-#include "direccion.h"
 
 Direccion::Direccion(){
     this->calle = this->ciudad = this->numero = this->pais = "";
@@ -30,4 +28,4 @@ string Direccion::getCalle(){
     return this -> calle;
 
 };
->>>>>>> Stashed changes
+
