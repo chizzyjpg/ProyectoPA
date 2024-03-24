@@ -7,9 +7,13 @@ Fecha::Fecha (){
 }
 
 Fecha::Fecha (int d, int m, int a){
-    this -> dia = d;
-    this -> mes = m;
-    this -> anio = a;
+    if ( d < 1 || d > 31 || m < 1 || m > 12 || a < 1900){
+        throw invalid_argument("Fecha no valida");
+    }else{
+        this -> dia = d;
+        this -> mes = m;
+        this -> anio = a;
+    }
 };
 
 
