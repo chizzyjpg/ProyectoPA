@@ -1,6 +1,6 @@
 #include "extranjera.h"
 
-Extranjera::Extranjera(string Nombre) : Empresa(Id, Dir){
+Extranjera::Extranjera(string Id, Direccion* Dir, string Nombre) : Empresa(Id, Dir){
     this->rut=Rut;
 };
 

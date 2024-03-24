@@ -7,7 +7,7 @@ class Nacional: public Empresa{
     private:
         string rut;
     public:
-        Nacional(string Rut);
+        Nacional(string Id, Direccion* Dir, string Rut);
         ~Nacional();
         void SetRut(string Rut);
         string GetRut();

@@ -1,6 +1,6 @@
 #include "nacional.h"
 
-Nacional::Nacional(string Rut) : Empresa(Id, Dir){
+Nacional::Nacional(string Id, Direccion* Dir, string Rut) : Empresa(Id, Dir){
     this->rut=Rut;
 };
 

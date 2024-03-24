@@ -7,7 +7,7 @@ class Extranjera: public Empresa{
     private:
         string nombreFantasia;
     public:
-        Extranjera(string Nombre);
+        Extranjera(string Id, Direccion* Dir, string Nombre);
         ~Extranjera();
         void SetNombre(string Nombre);
         string GetNombre();
