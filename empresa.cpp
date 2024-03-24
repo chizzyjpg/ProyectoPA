@@ -14,18 +14,18 @@ Empresa::~Empresa() {
     cout << "Fundio" << endl;
 };
 
-void SetId(string Id){
+void Empresa::SetId(string Id){
     this->id=Id;
 };
 
-void SetDir(Direccion Dir){
+void Empresa::SetDir(Direccion Dir){
     this->dir=Dir;
 };
 
-string GetId(){
+string Empresa::GetId(){
     return this->id;
 };
 
-Direccion GetDir(){
+Direccion Empresa::GetDir(){
     return this->dir;
 };
