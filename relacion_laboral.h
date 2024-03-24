@@ -7,11 +7,15 @@
 class RelacionLaboral {
     public:
         RelacionLaboral (float, Fecha*);
+        void setSueldo(float);
+        void setFechaDesvinculacion(Fecha*);
+        float getSueldo();
+        Fecha* getFechaDesvinculacion();
         float getSueldoLiquido ();
         ~RelacionLaboral();
     private:
         float sueldo;
-        Fecha * fechaDesvinculación;
+        Fecha * fechaDesvinculacion;
 };
 
 #endif
