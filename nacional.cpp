@@ -9,13 +9,13 @@ Nacional::~Nacional(){
 }
 
 void Nacional::SetRut(string Rut){
-    this->rut = RUT;
+    this->rut = Rut;
 };
 
 string Nacional::GetRut(){
     return this->rut;
 };
 
-float getDescuento(){
+float Nacional::getDescuento(){
     return 0.65
 };
