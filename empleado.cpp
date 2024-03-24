@@ -5,6 +5,7 @@ Empleado::Empleado(string Ci, string Nom, string Ape, Direccion * Dir){
     this->nombre = Nom;
     this->apellido = Ape;
     this->direccion = Dir;
+    this->Relaciones[0] = NULL; // Hay que arreglar esto para que permita añadirlo a un arreglo
 };
 
 void Empleado::setNom(string Nom){
