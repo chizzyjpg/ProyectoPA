@@ -1,7 +1,15 @@
 #define MAX_RELACIONES 50
+
+#ifndef EMPLEADO
+#define EMPLEADO
+
 #include <iostream>
-#include "/DataTypes/direccion.h"
+#include "./DataTypes/direccion.h"
+#include "relacion_laboral.h"
 using namespace std;
+
+class Direccion;
+class RelacionLaboral;
 
 class Empleado {
 	public:
@@ -10,7 +18,7 @@ class Empleado {
 		void setApe(string Ape);
 		void setCi(string Ci);
 		void setDir(Direccion Dir);
-		void agregarRel(relacionLaboral *Rel);
+		void agregarRel(RelacionLaboral *Rel);
 		string getNom();
 		string getApe();
 		string getCi();
@@ -20,6 +28,8 @@ class Empleado {
 		string ci;
 		string nombre;
 		string apellido;
-		Direccion direccion;
-		relacionLaboral *Relaciones[MAX_RELACIONES];
+		Direccion *direccion;
+		RelacionLaboral *Relaciones[MAX_RELACIONES];
 };
+
+#endif
