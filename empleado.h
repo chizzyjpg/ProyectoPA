@@ -8,9 +8,6 @@
 #include "relacion_laboral.h"
 using namespace std;
 
-class Direccion;
-class RelacionLaboral;
-
 class Empleado {
 	public:
 		Empleado(string Ci, string Nom, string Ape, Direccion* Dir);
