@@ -2,22 +2,22 @@
 #define EMPRESA_H
 
 #include <iostream>
-#include "direccion.h"
+#include "./DataTypes/direccion.h"
 using namespace std;
 
 class Empresa{
     public:
         Empresa();
-        Empresa(string, Direccion);
+        Empresa(string Id, Direccion* Dir);
         ~Empresa();
         void SetId(string);
-        void SetDir(Direccion);
+        void SetDir(Direccion*);
         string GetId();
-        Direccion GetDir();
+        Direccion* GetDir();
         virtual float getDescuento()=0;
     private:
         string id;
-        Direccion dir;
+        Direccion* dir;
 };
 
 #endif

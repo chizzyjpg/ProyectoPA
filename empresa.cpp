@@ -5,7 +5,7 @@ Empresa::Empresa(){
     this->dir;
 };
  
-Empresa::Empresa(string Id, Direccion Dir){
+Empresa::Empresa(string Id, Direccion * Dir){
     this->id=Id;
     this->dir=Dir;
 };
