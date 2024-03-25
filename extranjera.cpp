@@ -1,7 +1,7 @@
 #include "extranjera.h"
 
 Extranjera::Extranjera(string Id, Direccion* Dir, string Nombre) : Empresa(Id, Dir){
-    this->rut=Rut;
+    this->nombreFantasia=Nombre;
 };
 
 Extranjera::~Extranjera(){
@@ -17,5 +17,5 @@ string Extranjera::GetNombre(){
 };
 
 float Extranjera::getDescuento(){
-    return 20//return 0.80
+    return 20;//return 0.80
 };

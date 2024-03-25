@@ -17,5 +17,5 @@ string Nacional::GetRut(){
 };
 
 float Nacional::getDescuento(){
-    return 35//return 0.65
+    return 35;//return 0.65
 };
