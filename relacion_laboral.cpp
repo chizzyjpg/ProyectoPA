@@ -3,7 +3,7 @@
 //Constructor
 RelacionLaboral::RelacionLaboral(float Sue, Empresa *Empre){
     this->sueldo = Sue;
-    this->fechaDesvinculacion = NULL;//cuando se crea aca seria nada supongo
+    this->fechaDesvinculacion = NULL;
     this->LaEmpre = Empre;
 };
 

@@ -5,22 +5,22 @@ all: Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o em
 
 # Data types
 Fecha.o:
-	g++ -c Fecha.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/Fecha.cpp
 
 Direccion.o:
-	g++ -c Direccion.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/direccion.cpp
 
 DtEmpleado.o:
-	g++ -c DtEmpleado.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/dtEmpleado.cpp
 
 DtEmpresa.o:
-	g++ -c DtEmpresa.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/dtEmpresa.cpp
 
 DtExtranjera.o: DtEmpresa.o
-	g++ -c DtExtranjera.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/dtExtranjera.cpp
 
 DtNacional.o: DtEmpresa.o
-	g++ -c DtNacional.cpp
+	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/dtNacional.cpp
 
 
 
@@ -52,5 +52,5 @@ clean:
 run:
 	make clean
 	make
-	clear
+#clear
 	./programa
