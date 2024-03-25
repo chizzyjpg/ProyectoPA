@@ -1,39 +1,48 @@
 #include "relacion_laboral.h"
 
-//Constructor
-RelacionLaboral::RelacionLaboral(float Sue, Empresa *Empre){
+// Constructor:
+RelacionLaboral::RelacionLaboral(float Sue, Empresa* Empre){
     this->sueldo = Sue;
+    this->empresa = Empre;
     this->fechaDesvinculacion = NULL;
-    this->LaEmpre = Empre;
 };
 
+
+// Funcionalidad:
+float RelacionLaboral::getSueldoLiquido (){
+    return (this->getSueldo() * this->empresa->getDescuento());
+};
+
+
+// Setters:
 void RelacionLaboral::setSueldo(float Sue){
     this->sueldo = Sue;
 };
-void RelacionLaboral::setFechaDesvinculacion(Fecha *Fech){
-    this->fechaDesvinculacion = Fech;
+
+void RelacionLaboral::setFechaDesvinculacion(Fecha* Fecha){
+    this->fechaDesvinculacion = Fecha;
 };
-void RelacionLaboral::setLaEmpre(Empresa *Empre){
-    this->LaEmpre = Empre;
+
+void RelacionLaboral::setEmpresa(Empresa* Empre){
+    this->empresa = Empre;
 };
+
+
+// Getters:
 float RelacionLaboral::getSueldo(){
     return this->sueldo;
 };
+
 Fecha* RelacionLaboral::getFechaDesvinculacion(){
     return this->fechaDesvinculacion;
 };
-Empresa* RelacionLaboral::getLaEmpre(){
-    return this->LaEmpre;
-};
-float RelacionLaboral::getSueldoLiquido (){
 
-    /*float descuento;
-    descuento = (this->getSueldo()*this->LaEmpre->getDescuento()/100)
-    return (this->getSueldo() - descuento)*/
-
-    /*return (this->getSueldo()*this->LaEmpre->getDescuento());   Algo asi?*/
+Empresa* RelacionLaboral::getEmpresa(){
+    return this->empresa;
 };
 
+
+// Destructor: 
 RelacionLaboral::~RelacionLaboral(){
     
 };

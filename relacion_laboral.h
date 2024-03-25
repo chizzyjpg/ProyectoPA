@@ -1,25 +1,24 @@
 #ifndef REL_LABORAL
 #define REL_LABORAL
 #include "empresa.h"
-#include "empleado.h"
 #include "./DataTypes/Fecha.h"
 
 
 class RelacionLaboral {
     public:
-        RelacionLaboral (float, Empresa*);
+        RelacionLaboral (float sueldo, Empresa* empresa);
         void setSueldo(float);
         void setFechaDesvinculacion(Fecha*);
-        void setLaEmpre(Empresa*);
+        void setEmpresa(Empresa*);
         float getSueldo();
         Fecha* getFechaDesvinculacion();
-        Empresa* getLaEmpre();
-        float getSueldoLiquido ();
+        Empresa* getEmpresa();
+        float getSueldoLiquido();
         ~RelacionLaboral();
     private:
         float sueldo;
-        Fecha * fechaDesvinculacion;
-        Empresa * LaEmpre;
+        Fecha* fechaDesvinculacion;
+        Empresa* empresa;
 };
 
 #endif
