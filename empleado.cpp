@@ -28,6 +28,7 @@ Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir, RelacionLa
 void Empleado::agregarRel(RelacionLaboral *Rel){
     if(Relaciones[0] == NULL){
         this->Relaciones[0] = Rel;
+        this->Relaciones[1] = NULL;
     }else{
         int i = 1;
         while (i < 50 && this->Relaciones[i] != NULL){
@@ -35,6 +36,9 @@ void Empleado::agregarRel(RelacionLaboral *Rel){
         }
         if(i < 50){
             Relaciones[i] = Rel;
+            if(i!=49){
+                this->Relaciones[i+1] = NULL;
+            }
         }else{
             cout << "Esta persona no puede tener mas trabajos";
         }
