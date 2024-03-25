@@ -1,13 +1,13 @@
 #ifndef DTEXTRANJERA_H
 #define DTEXTRANJERA_H
 
-#include "empresa.h"
+#include "dtEmpresa.h"
 
-class Extranjera: public Empresa{
+class DtExtranjera: public DtEmpresa{
     private:
         string nombreFantasia;
     public:
-        Extranjera(string Id, Direccion* Dir, string Nombre);
+        DtExtranjera(string Id, Direccion* Dir, string Nombre);
         string GetNombre();
 };
 

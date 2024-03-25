@@ -2,13 +2,13 @@
 #define DTEMPRESA_H
 
 #include <iostream>
-#include "./DataTypes/direccion.h"
+#include "direccion.h"
 using namespace std;
 
-class Empresa{
+class DtEmpresa{
     public:
-        Empresa();
-        Empresa(string Id, Direccion* Dir);
+        DtEmpresa();
+        DtEmpresa(string Id, Direccion* Dir);
         string GetId();
         Direccion* GetDir();
     private:

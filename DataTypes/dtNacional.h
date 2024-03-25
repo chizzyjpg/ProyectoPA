@@ -1,13 +1,13 @@
 #ifndef DTNACIONAL_H
 #define DTNACIONAL_H
 
-#include "empresa.h"
+#include "dtEmpresa.h"
 
-class Nacional: public Empresa{
+class DtNacional: public DtEmpresa{
     private:
         string rut;
     public:
-        Nacional(string Id, Direccion* Dir, string Rut);
+        DtNacional(string Id, Direccion* Dir, string Rut);
         string GetRut();
 };
 
