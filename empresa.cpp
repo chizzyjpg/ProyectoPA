@@ -18,7 +18,7 @@ void Empresa::SetId(string Id){
     this->id=Id;
 };
 
-void Empresa::SetDir(Direccion Dir){
+void Empresa::SetDir(Direccion *Dir){
     this->dir=Dir;
 };
 
@@ -26,6 +26,6 @@ string Empresa::GetId(){
     return this->id;
 };
 
-Direccion Empresa::GetDir(){
+Direccion* Empresa::GetDir(){
     return this->dir;
 };
