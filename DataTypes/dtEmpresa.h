@@ -6,15 +6,14 @@
 using namespace std;
 
 class DtEmpresa{
-    private:
-        string id;
-        Direccion*dir;
     public:
         DtEmpresa();
-        DtEmpresa(string Id, Direccion *Dir);
+        DtEmpresa(string Id, Direccion* Dir);
         string GetId();
-        Direccion *GetDir();
-
+        Direccion* GetDir();
+    private:
+        string id;
+        Direccion* dir;
 };
 
 #endif

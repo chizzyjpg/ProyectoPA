@@ -11,6 +11,7 @@ DtEmpresa::DtEmpresa(string Id, Direccion* Dir){
     this->dir = Dir;
 };
 
+
 // Getters:
 string DtEmpresa::GetId(){
     return this->id;

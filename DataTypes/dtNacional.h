@@ -4,11 +4,11 @@
 #include "dtEmpresa.h"
 
 class DtNacional: public DtEmpresa{
-    private:
-        string rut;
     public: 
         DtNacional(string Id, Direccion* Dir, string Rut);
         string GetRut();
+    private:
+        string rut;
 };
 
 #endif
