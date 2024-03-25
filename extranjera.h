@@ -5,7 +5,6 @@
 
 class Extranjera : public Empresa{
     public:
-        Extranjera();        
         Extranjera(string Id, Direccion* Dir, string Nombre);
         float getDescuento();
         void SetNombre(string Nombre);
