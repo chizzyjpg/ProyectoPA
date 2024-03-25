@@ -9,12 +9,12 @@ class Empresa{
     public:
         Empresa();
         Empresa(string Id, Direccion* Dir);
-        ~Empresa();
+        virtual float getDescuento()=0;
         void SetId(string);
         void SetDir(Direccion*);
         string GetId();
         Direccion* GetDir();
-        virtual float getDescuento()=0;
+        ~Empresa();
     private:
         string id;
         Direccion* dir;

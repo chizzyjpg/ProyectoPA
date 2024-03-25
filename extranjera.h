@@ -3,15 +3,16 @@
 
 #include "empresa.h"
 
-class Extranjera: public Empresa{
-    private:
-        string nombreFantasia;
+class Extranjera : public Empresa{
     public:
+        Extranjera();        
         Extranjera(string Id, Direccion* Dir, string Nombre);
-        ~Extranjera();
+        float getDescuento();
         void SetNombre(string Nombre);
         string GetNombre();
-        float getDescuento();
+        ~Extranjera();
+    private:
+        string nombreFantasia;
 };
 
 #endif

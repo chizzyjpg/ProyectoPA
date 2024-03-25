@@ -9,7 +9,7 @@ class Fecha {
         int dia, mes, anio;
     public:
         Fecha();
-        Fecha(int, int, int);
+        Fecha(int d, int m, int a);
         int getDia();
         int getMes();
         int getAnio();

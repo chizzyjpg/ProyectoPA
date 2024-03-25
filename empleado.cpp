@@ -1,17 +1,44 @@
 #include "empleado.h"
-// Constructor: 
-Empleado::Empleado(string Ci, string Nom, string Ape, Direccion * Dir){
+
+// Constructor:
+Empleado::Empleado(){
+    this->ci = this->nombre = this->apellido = "";
+    this->direccion = NULL;
+    this->Relaciones[0] = NULL;
+};
+
+Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir){
     this->ci = Ci;
     this->nombre = Nom;
     this->apellido = Ape;
     this->direccion = Dir;
-    this->Relaciones[0] = NULL; // Hay que arreglar esto para que permita añadirlo a un arreglo
+    this->Relaciones[0] = NULL;
+};
+
+Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir, RelacionLaboral* Rel){
+    this->ci = Ci;
+    this->nombre = Nom;
+    this->apellido = Ape;
+    this->direccion = Dir;
+    this->Relaciones[0] = Rel;
 };
 
 
 // Funcionalidad:
 void Empleado::agregarRel(RelacionLaboral *Rel){
-    this->Relaciones[0] = Rel; // Hay que arreglar esto para que permita añadirlo a un arreglo
+    if(Relaciones[0] == NULL){
+        this->Relaciones[0] = Rel;
+    }else{
+        int i = 0;
+        while (i < 50 && this->Relaciones[i] != NULL){
+            i++;
+        }
+        if(i < 50){
+            Relaciones[i] = Rel;
+        }else{
+            cout << "Esta persona no puede tener mas trabajos";
+        }
+    }
 };
 
 

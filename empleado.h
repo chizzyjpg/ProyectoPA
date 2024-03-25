@@ -10,7 +10,9 @@ using namespace std;
 
 class Empleado {
 	public:
+		Empleado();
 		Empleado(string Ci, string Nom, string Ape, Direccion* Dir);
+		Empleado(string Ci, string Nom, string Ape, Direccion* Dir, RelacionLaboral* Rel);
 		void setNom(string Nom);
 		void setApe(string Ape);
 		void setCi(string Ci);

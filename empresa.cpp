@@ -1,31 +1,37 @@
 #include "empresa.h"
 
+// Constructor:
 Empresa::Empresa(){
-    this->id="NULL";
-    this->dir;
+    this->id = "";
+    this->dir = NULL;
 };
  
-Empresa::Empresa(string Id, Direccion * Dir){
-    this->id=Id;
-    this->dir=Dir;
+Empresa::Empresa(string Id, Direccion* Dir){
+    this->id = Id;
+    this->dir = Dir;
 };
 
-Empresa::~Empresa() {
-    cout << "Fundio" << endl;
-};
 
+// Setters:
 void Empresa::SetId(string Id){
-    this->id=Id;
+    this->id = Id;
 };
 
-void Empresa::SetDir(Direccion Dir){
-    this->dir=Dir;
+void Empresa::SetDir(Direccion* Dir){
+    this->dir = Dir;
 };
 
+
+// Getters:
 string Empresa::GetId(){
     return this->id;
 };
 
-Direccion Empresa::GetDir(){
+Direccion* Empresa::GetDir(){
     return this->dir;
+};
+
+// Destructor:
+Empresa::~Empresa() {
+    cout << "Fundio" << endl;
 };

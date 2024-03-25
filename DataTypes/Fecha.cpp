@@ -23,9 +23,9 @@ int Fecha::getDia(){
 };
 
 int Fecha::getMes(){
-    return this->dia;
+    return this->mes;
 };
 
 int Fecha::getAnio(){
-    return this->dia;
+    return this->anio;
 };
