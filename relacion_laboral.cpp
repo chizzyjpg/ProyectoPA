@@ -1,9 +1,9 @@
 #include "relacion_laboral.h"
 
 //Constructor
-RelacionLaboral::RelacionLaboral(float Sue, Fecha *Fech, Empresa *Empre){
+RelacionLaboral::RelacionLaboral(float Sue, Empresa *Empre){
     this->sueldo = Sue;
-    this->fechaDesvinculacion = Fech;//cuando se crea aca seria nada supongo
+    this->fechaDesvinculacion = NULL;//cuando se crea aca seria nada supongo
     this->LaEmpre = Empre;
 };
 

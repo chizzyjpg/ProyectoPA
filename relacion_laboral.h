@@ -4,9 +4,10 @@
 #include "empleado.h"
 #include "./DataTypes/Fecha.h"
 
+
 class RelacionLaboral {
     public:
-        RelacionLaboral (float, Fecha*, Empresa*);
+        RelacionLaboral (float, Empresa*);
         void setSueldo(float);
         void setFechaDesvinculacion(Fecha*);
         void setLaEmpre(Empresa*);//Bernardo
