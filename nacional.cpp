@@ -6,7 +6,7 @@ Nacional::Nacional(string Id, Direccion* Dir, string Rut) : Empresa(Id, Dir){
 
 Nacional::~Nacional(){
     cout <<"La vendieron"<< endl;
-}
+};
 
 void Nacional::SetRut(string Rut){
     this->rut = Rut;
