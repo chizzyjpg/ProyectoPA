@@ -6,7 +6,7 @@ Extranjera::Extranjera(string Id, Direccion* Dir, string Nombre) : Empresa(Id, D
 
 Extranjera::~Extranjera(){
     cout <<"La compraron"<< endl;
-}
+};
 
 void Extranjera::SetNombre(string Nombre){
     this->nombreFantasia = Nombre;
