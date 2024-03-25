@@ -17,5 +17,5 @@ string Extranjera::GetNombre(){
 };
 
 float Extranjera::getDescuento(){
-    return 20;//return 0.80
+    return 0.80;
 };
