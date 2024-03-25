@@ -4,7 +4,7 @@
 #include "dtEmpresa.h"
 
 class DtExtranjera: public DtEmpresa{
-    private:
+    private: 
         string nombreFantasia;
     public:
         DtExtranjera(string Id, Direccion* Dir, string Nombre);

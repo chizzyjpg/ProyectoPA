@@ -13,7 +13,7 @@ class DtEmpresa{
         Direccion* GetDir();
     private:
         string id;
-        Direccion* dir;
+        Direccion* dir; 
 };
 
 #endif

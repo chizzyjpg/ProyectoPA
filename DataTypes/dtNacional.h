@@ -6,7 +6,7 @@
 class DtNacional: public DtEmpresa{
     private:
         string rut;
-    public:
+    public: 
         DtNacional(string Id, Direccion* Dir, string Rut);
         string GetRut();
 };
