@@ -2,7 +2,6 @@ all: Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o em
 	g++ Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o -o programa
 
 
-
 # Data types
 Fecha.o:
 	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/Fecha.cpp
@@ -23,7 +22,6 @@ DtNacional.o: DtEmpresa.o
 	g++ -c C:/Users/chizzy/OneDrive/Escritorio/Programacion/C++/ProyectoPA/DataTypes/dtNacional.cpp
 
 
-
 # Clases
 empresa.o: Direccion.o
 	g++ -c empresa.cpp
@@ -41,10 +39,8 @@ relacion_laboral.o: empresa.o empleado.o Fecha.o
 	g++ -c relacion_laboral.cpp	
 
 
-
 main.o: 
 	g++ -c main.cpp
-
 
 
 clean:
@@ -52,5 +48,5 @@ clean:
 run:
 	make clean
 	make
-#clear
+	clear
 	./programa
