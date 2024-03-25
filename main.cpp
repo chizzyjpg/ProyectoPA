@@ -1,12 +1,41 @@
+#define MAX_EMPLEADOS 100
+#define MAX_EMPRESAS 100
+
+#include "empleado.h"
+#include "relacion_laboral.h"
+
+const Empleado** empleados [MAX_EMPLEADOS];
+const Empresa** empresas [MAX_EMPRESAS];
+
+int cantEmpleados = 0;
+int cantEmpresas = 0;
+
 int main(){
 
-}
+    return 0;
+};
 
 /*
 a) void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir) 
 Crea un nuevo empleado en el sistema.
 En caso de ya existir, levanta la excepción std::invalid_argument.
+*/
+void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
+    int i = 0;
+    while (i <= cantEmpleados){
+        if (empleados[i]->ci == ci){
+            throw invalid_argument("Persona ya registrada");
+        }else{
+            Empleado* nuevoEmpleado = new Empleado(ci, nombre, apellido, dir);
+            empleados[cantEmpleados++] = nuevoEmpleado;
+            break;
+        }
+        i++;
+    }
+};
 
+
+/*
 b) void agregarEmpresa(DtEmpresa * empresa), 
 Crea una nueva empresa en el sistema. 
 En caso de ya existir, levanta una excepción std::invalid_argument.
