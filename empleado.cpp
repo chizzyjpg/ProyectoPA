@@ -29,7 +29,7 @@ void Empleado::agregarRel(RelacionLaboral *Rel){
     if(Relaciones[0] == NULL){
         this->Relaciones[0] = Rel;
     }else{
-        int i = 0;
+        int i = 1;
         while (i < 50 && this->Relaciones[i] != NULL){
             i++;
         }
