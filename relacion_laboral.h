@@ -10,16 +10,16 @@ class RelacionLaboral {
         RelacionLaboral (float, Empresa*);
         void setSueldo(float);
         void setFechaDesvinculacion(Fecha*);
-        void setLaEmpre(Empresa*);//Bernardo
+        void setLaEmpre(Empresa*);
         float getSueldo();
         Fecha* getFechaDesvinculacion();
-        Empresa* getLaEmpre();//bernardo
+        Empresa* getLaEmpre();
         float getSueldoLiquido ();
         ~RelacionLaboral();
     private:
         float sueldo;
         Fecha * fechaDesvinculacion;
-        Empresa * LaEmpre;//Bernardo
+        Empresa * LaEmpre;
 };
 
 #endif
