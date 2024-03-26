@@ -40,7 +40,23 @@ void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
 b) void agregarEmpresa(DtEmpresa * empresa), 
 Crea una nueva empresa en el sistema. 
 En caso de ya existir, levanta una excepción std::invalid_argument.
+*/
+void agregarEmpresa(DtEmpresa * empresa){
+    if(cantEmpresas == MAX_EMPRESAS){
+        throw invalid_argument("Maximo de empresas alcanzado");
+    }
+    int i = 0;
+    while (i < cantEmpresas){
+        if (empresas[i]->id == empresa->id){
+            throw invalid_argument("Empresa ya registrada");
+        }
+        i++;
+    }
+    empleados[cantEmpleados++] = empresa;
+};
 
+
+/*
 c) DtEmpleado** listarEmpleados(int & cantEmpleados)
 Retorna un arreglo de DtEmpleado* con todos los empleados del sistema. 
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
