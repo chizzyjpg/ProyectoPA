@@ -21,17 +21,18 @@ Crea un nuevo empleado en el sistema.
 En caso de ya existir, levanta la excepción std::invalid_argument.
 */
 void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
+    if(cantEmpleados == MAX_EMPLEADOS){
+        throw invalid_argument("Maximo de personas alcanzado");
+    }
     int i = 0;
-    while (i <= cantEmpleados){
+    while (i < cantEmpleados){
         if (empleados[i]->ci == ci){
             throw invalid_argument("Persona ya registrada");
-        }else{
-            Empleado* nuevoEmpleado = new Empleado(ci, nombre, apellido, dir);
-            empleados[cantEmpleados++] = nuevoEmpleado;
-            break;
         }
         i++;
     }
+    Empleado* nuevoEmpleado = new Empleado(ci, nombre, apellido, dir);
+    empleados[cantEmpleados++] = nuevoEmpleado;
 };
 
 
