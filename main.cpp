@@ -74,6 +74,18 @@ d) void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo
 Vincula un empleado con una empresa. 
 Si la empresa ya está dentro de las empresas que el empleado ha trabajado o trabaja se levanta una excepción std::invalid_argument.
 */
+void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
+    int numEmpleado = 0;
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+        numEmpleado++;
+    };
+    int numEmpresa = 0;
+    while (numEmpresa < MAX_EMPRESAS &&  empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
+        numEmpresa++;
+    };
+    RelacionLaboral relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
+    empleados[numEmpleado]->agregarRel(relacion);
+}
 
 
 /*
