@@ -83,15 +83,26 @@ void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
     while (numEmpresa < MAX_EMPRESAS &&  empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
         numEmpresa++;
     };
-    RelacionLaboral relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
+    RelacionLaboral* relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
     empleados[numEmpleado]->agregarRel(relacion);
-}
+};
 
 
 /*
 e) void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación)
 Desvincula al empleado de la empresa, registrando la fecha en que terminó el vinculo.
 */
+void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación){
+    int numEmpleado = 0;
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+        numEmpleado++;
+    };
+    int numEmpresa = 0;
+    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->Relaciones[numEmpresa] != NULL && empleados[numEmpleado]->Relaciones[numEmpresa]->empresa->id != idEmpresa){
+        numEmpresa++;
+    };
+    empleados[numEmpleado]->Relaciones[numEmpresa]->setFechaDesvinculacion(desvinculación);
+};
 
 
 /*
