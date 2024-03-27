@@ -89,19 +89,42 @@ void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
     while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
         numEmpleado++;
     };
+    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+        throw invalid_argument("No se encontró al empleado");
+    }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_EMPRESAS &&  empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
+    while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
         numEmpresa++;
     };
-    RelacionLaboral relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
+    if(empresas[numEmpresa] == NUL || numEmpresa == MAX_EMPRESAS){
+        throw invalid_argument("No se encontró a la empresa");
+    }
+    RelacionLaboral* relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
     empleados[numEmpleado]->agregarRel(relacion);
-}
+};
 
 
 /*
 e) void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación)
 Desvincula al empleado de la empresa, registrando la fecha en que terminó el vinculo.
 */
+void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación){
+    int numEmpleado = 0;
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+        numEmpleado++;
+    };
+    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+        throw invalid_argument("No se encontró al empleado");
+    }
+    int numEmpresa = 0;
+    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->Relaciones[numEmpresa] != NULL && empleados[numEmpleado]->Relaciones[numEmpresa]->empresa->id != idEmpresa){
+        numEmpresa++;
+    };
+    if(empleados[numEmpleado]->Relaciones[numEmpresa] == NULL || numEmpresa == MAX_RELACIONES){
+        throw invalid_argument("No se encontró al empleado");
+    }
+    empleados[numEmpleado]->Relaciones[numEmpresa]->setFechaDesvinculacion(desvinculación);
+};
 
 
 /*
