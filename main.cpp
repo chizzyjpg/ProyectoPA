@@ -10,8 +10,6 @@
 const Empleado** empleados [MAX_EMPLEADOS];
 const DtEmpresa** empresas [MAX_EMPRESAS];
 
-// int cantEmpleados = 0;
-// int cantEmpresas = 0;
 
 int main(){
     empleados[0] = NULL;
@@ -117,7 +115,7 @@ void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinc
         throw invalid_argument("No se encontró al empleado");
     }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->Relaciones[numEmpresa] != NULL && empleados[numEmpleado]->Relaciones[numEmpresa]->empresa->id != idEmpresa){
+    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->Relaciones[numEmpresa] != NULL && empleados[numEmpleado]->Relaciones[numEmpresa]->getEmpresa()->id != idEmpresa){
         numEmpresa++;
     };
     if(empleados[numEmpleado]->Relaciones[numEmpresa] == NULL || numEmpresa == MAX_RELACIONES){
@@ -132,7 +130,15 @@ f) DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpres
 Retorna un arreglo con las empresas donde trabaja activamente el empleado. 
 El largo del arreglo de empresas está dado por el parámetro cantEmpresas.
 */
-
+DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas){
+    int numEmpleado = 0;
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+        numEmpleado++;
+    };
+    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+        throw invalid_argument("No se encontró al empleado");
+    }
+}
 
 
 
