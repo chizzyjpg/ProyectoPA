@@ -26,12 +26,12 @@ class Empleado {
 		Direccion* getDir();
 		~Empleado();
 	private:
+		int cantRel = 0;
 		string ci;
 		string nombre;
 		string apellido;
 		Direccion *direccion;
 		RelacionLaboral *Relaciones[MAX_RELACIONES];
-		dtEmpleado* Datos;
 };
 
 #endif

@@ -68,14 +68,15 @@ Retorna un arreglo de DtEmpleado* con todos los empleados del sistema.
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
 DtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] = NULL || cantEmpleados < 1){
-        cout<<"No hay empleados"<< endl;
+    if(empleados[0] = NULL || (cantEmpleados < 1 || cantEmpleados > 100)){
+        cout<<"error"<< endl;
         return 0;
     }
     DtEmpleado** ArreEmpl[cantEmpleados];
     for(int i=0; i < cantEmpleados; i++){
-        ArreEmpl[i] = 
+        ArreEmpl[i] = empleados[i]->getDatos();
     }
+    return
 
 };
 
@@ -96,8 +97,12 @@ void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
     while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
         numEmpresa++;
     };
-    if(empresas[numEmpresa] == NUL || numEmpresa == MAX_EMPRESAS){
+    if(empresas[numEmpresa] == NULL || numEmpresa == MAX_EMPRESAS){
         throw invalid_argument("No se encontró a la empresa");
+    }
+    for(int i=0;empleados[numEmpleado]->Relaciones[i] =! NULL && i < MAX_RELACIONES;i++){
+        if(empleados[numEmpleado]->Relaciones[i]->getEmpresa()->GetId()==idEmpresa)
+            throw invalid_argument("Ya trabajo en esta empresa");
     }
     RelacionLaboral* relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
     empleados[numEmpleado]->agregarRel(relacion);
