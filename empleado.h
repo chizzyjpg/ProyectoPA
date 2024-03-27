@@ -6,6 +6,8 @@
 #include <iostream>
 #include "./DataTypes/direccion.h"
 #include "relacion_laboral.h"
+#include "./DataTypes/dtEmpleado.h"
+
 using namespace std;
 
 class Empleado {
@@ -29,6 +31,7 @@ class Empleado {
 		string apellido;
 		Direccion *direccion;
 		RelacionLaboral *Relaciones[MAX_RELACIONES];
+		dtEmpleado* Datos;
 };
 
 #endif

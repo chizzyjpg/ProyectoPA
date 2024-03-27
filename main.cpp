@@ -67,7 +67,17 @@ c) DtEmpleado** listarEmpleados(int & cantEmpleados)
 Retorna un arreglo de DtEmpleado* con todos los empleados del sistema. 
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
+DtEmpleado** listarEmpleados(int & cantEmpleados){
+    if(empleados[0] = NULL || cantEmpleados < 1){
+        cout<<"No hay empleados"<< endl;
+        return 0;
+    }
+    DtEmpleado** ArreEmpl[cantEmpleados];
+    for(int i=0; i < cantEmpleados; i++){
+        ArreEmpl[i] = 
+    }
 
+};
 
 /*
 d) void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo)
