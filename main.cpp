@@ -10,7 +10,6 @@
 const Empleado** empleados [MAX_EMPLEADOS];
 const DtEmpresa** empresas [MAX_EMPRESAS];
 
-
 int main(){
     empleados[0] = NULL;
     empresas[0] = NULL;
@@ -66,16 +65,24 @@ Retorna un arreglo de DtEmpleado* con todos los empleados del sistema.
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
 DtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] = NULL || (cantEmpleados < 1 || cantEmpleados > 100)){
+    if(empleados[0] = NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
         cout<<"error"<< endl;
-        return 0;
+        return NULL;
     }
-    DtEmpleado** ArreEmpl[cantEmpleados];
-    for(int i=0; i < cantEmpleados; i++){
-        ArreEmpl[i] = empleados[i]->getDatos();
+    dtEmpleado** ArreEmpl = new dtEmpleado*[cantEmpleados];
+    int i = 0;
+    float sueldoLiquidoTotal = 0.0;
+    Empleado* empleado;
+    while(empleados[i] != NULL && i < cantEmpleados){
+        empleado = empleados[i];
+        for (int j = 0; j < MAX_RELACIONES && empleados[i]->Relaciones[j] =! NULL; j++) {
+            if(empleado->Relaciones[j]->getFechaDesvinculacion == NULL)
+                sueldoLiquidoTotal += empleado->Relaciones[j]->getSueldoLiquido();
+        }
+        ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), *(empleado->getDir()), sueldoLiquidoTotal);
+        i++;
     }
-    return
-
+    return ArreEmpl;
 };
 
 /*
