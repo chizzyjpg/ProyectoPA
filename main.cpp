@@ -73,15 +73,15 @@ DtEmpleado** listarEmpleados(int & cantEmpleados){
     int i = 0;
     float sueldoLiquidoTotal = 0.0;
     Empleado* empleado;
-    while(empleados[i] != NULL && i < cantEmpleados){
+    while(i < cantEmpleados && empleados[i] != NULL){
         empleado = empleados[i];
-        for (int j = 0; j < MAX_RELACIONES && empleados[i]->Relaciones[j] =! NULL; j++) {
-            if(empleado->Relaciones[j]->getFechaDesvinculacion == NULL)
+        for (int j = 0; j < MAX_RELACIONES ; j++) {
+            if(empleados[i]->Relaciones[j] =! NULL && empleado->Relaciones[j]->getFechaDesvinculacion() == NULL)
                 sueldoLiquidoTotal += empleado->Relaciones[j]->getSueldoLiquido();
         }
         ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), *(empleado->getDir()), sueldoLiquidoTotal);
         i++;
-    }
+    };
     return ArreEmpl;
 };
 
@@ -147,9 +147,24 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
     while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
         numEmpleado++;
     };
-    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+    if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
+    DtEmpresa** empresasEmpleado = new DtEmpresa*[cantEmpresas];
+    for (int j = 0; j < MAX_RELACIONES; j++){
+        if(empleados[numEmpleado]->Relaciones[j] != NULL && empleados[numEmpleado]->Relaciones[j]->getFechaDesvinculacion() == NULL){
+            if (dynamic_cast<Nacional*>(empresa) != nullptr) {
+                string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
+                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetId(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetDir(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetRut());
+            } 
+            else if (dynamic_cast<Extranjera*>(empresa) != nullptr) {
+                string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
+                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetId(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetDir(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetNombre());
+            }
+            break;
+        }
+    }
+    return empresasEmpleado;
 }
 
 
