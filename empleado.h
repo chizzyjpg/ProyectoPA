@@ -26,7 +26,6 @@ class Empleado {
 		Direccion* getDir();
 		~Empleado();
 	private:
-		int cantRel = 0;
 		string ci;
 		string nombre;
 		string apellido;
