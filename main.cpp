@@ -95,21 +95,21 @@ Si la empresa ya está dentro de las empresas que el empleado ha trabajado o tra
 */
 void agregarRelacionLaboral(string ciEmpleado, string idEmpresa, float sueldo){
     int numEmpleado = 0;
-    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi() != ciEmpleado){
         numEmpleado++;
-    };
-    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+    }
+    if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->id != idEmpresa){
+    while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->GetId != idEmpresa){
         numEmpresa++;
-    };
-    if(empresas[numEmpresa] == NULL || numEmpresa == MAX_EMPRESAS){
+    }
+    if(numEmpresa == MAX_EMPRESAS || empresas[numEmpresa] == NULL){
         throw invalid_argument("No se encontró a la empresa");
     }
-    for(int i=0;empleados[numEmpleado]->Relaciones[i] != NULL && i < MAX_RELACIONES;i++){
-        if(empleados[numEmpleado]->Relaciones[i]->getEmpresa()->GetId()==idEmpresa)
+    for(int i=0; i < MAX_RELACIONES && empleados[numEmpleado]->getRel(i) != NULL; i++){
+        if(empleados[numEmpleado]->getRel(i)->getEmpresa()->GetId()==idEmpresa)
             throw invalid_argument("Ya trabajo en esta empresa");
     }
     RelacionLaboral* relacion = new RelacionLaboral(sueldo, empresas[numEmpresa]);
@@ -123,20 +123,20 @@ Desvincula al empleado de la empresa, registrando la fecha en que terminó el vi
 */
 void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación){
     int numEmpleado = 0;
-    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi != ciEmpleado){
         numEmpleado++;
     };
-    if(empleados[numEmpleado] == NULL || numEmpleado == MAX_EMPLEADOS){
+    if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->Relaciones[numEmpresa] != NULL && empleados[numEmpleado]->Relaciones[numEmpresa]->getEmpresa()->id != idEmpresa){
+    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->getRel(numEmpresa) != NULL && empleados[numEmpleado]->getRel(numEmpresa)->getEmpresa()->GetId != idEmpresa){
         numEmpresa++;
     };
-    if(empleados[numEmpleado]->Relaciones[numEmpresa] == NULL || numEmpresa == MAX_RELACIONES){
+    if(numEmpresa == MAX_RELACIONES || empleados[numEmpleado]->getRel(numEmpresa) == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
-    empleados[numEmpleado]->Relaciones[numEmpresa]->setFechaDesvinculacion(desvinculación);
+    empleados[numEmpleado]->getRel(numEmpresa)->setFechaDesvinculacion(desvinculación);
 };
 
 
@@ -147,7 +147,7 @@ El largo del arreglo de empresas está dado por el parámetro cantEmpresas.
 */
 DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas){
     int numEmpleado = 0;
-    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi != ciEmpleado){
         numEmpleado++;
     };
     if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
@@ -155,15 +155,15 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
     }
     DtEmpresa** empresasEmpleado = new DtEmpresa*[cantEmpresas];
     int contadorEmpresas = 0;
-    for (int j = 0; j < MAX_RELACIONES; j++){
-        if(empleados[numEmpleado]->Relaciones[j] != NULL && empleados[numEmpleado]->Relaciones[j]->getFechaDesvinculacion() == NULL){
+    for (int j = 0; j < MAX_RELACIONES && empleados[numEmpleado]->getRel(j) != NULL; j++){
+        if(empleados[numEmpleado]->getRel(j)->getFechaDesvinculacion() == NULL){
             if (dynamic_cast<Nacional*>(empresa) != NULL) {
                 string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
-                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetId(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetDir(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetRut());
+                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetRut());
             } 
             else if (dynamic_cast<Extranjera*>(empresa) != NULL) {
                 string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
-                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetId(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetDir(), empleados[numEmpleado]->Relaciones[j]->getEmpresa()->GetNombre());
+                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetNombre());
             }
         }
     }

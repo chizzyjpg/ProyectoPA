@@ -4,7 +4,8 @@
 Empleado::Empleado(){
     this->ci = this->nombre = this->apellido = "";
     this->direccion = NULL;
-    this->Relaciones[0] = NULL;
+    for(int i=0; i < MAX_RELACIONES; i++)
+        this->Relaciones[i] = NULL;
 };
 
 Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir){
@@ -12,8 +13,8 @@ Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir){
     this->nombre = Nom;
     this->apellido = Ape;
     this->direccion = Dir;
-    this->Relaciones[0] = NULL;
-};
+    for(int i=0; i < MAX_RELACIONES; i++)
+        this->Relaciones[i] = NULL;};
 
 Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir, RelacionLaboral* Rel){
     this->ci = Ci;
@@ -28,17 +29,13 @@ Empleado::Empleado(string Ci, string Nom, string Ape, Direccion* Dir, RelacionLa
 void Empleado::agregarRel(RelacionLaboral *Rel){
     if(Relaciones[0] == NULL){
         this->Relaciones[0] = Rel;
-        this->Relaciones[1] = NULL;
     }else{
         int i = 1;
-        while (i < 50 && this->Relaciones[i] != NULL){
+        while (i < MAX_RELACIONES && this->Relaciones[i] != NULL){
             i++;
         }
-        if(i < 50){
+        if(i < MAX_RELACIONES){
             Relaciones[i] = Rel;
-            if(i!=49){
-                this->Relaciones[i+1] = NULL;
-            }
         }else{
             cout << "Esta persona no puede tener mas trabajos";
         }
