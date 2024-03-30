@@ -7,8 +7,8 @@
 #include "./DataTypes/dtExtranjera.h"
 #include "./DataTypes/dtNacional.h"
 
-const Empleado** empleados [MAX_EMPLEADOS];
-const DtEmpresa** empresas [MAX_EMPRESAS];
+Empleado* empleados [MAX_EMPLEADOS];
+DtEmpresa* empresas [MAX_EMPRESAS];
 
 int main(){
     empleados[0] = NULL;
@@ -21,10 +21,10 @@ a) void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir
 Crea un nuevo empleado en el sistema.
 En caso de ya existir, levanta la excepción std::invalid_argument.
 */
-void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
+void agregarEmpleado(string ci, string nombre, string apellido, Direccion *dir){
     int i = 0;
     while (i < MAX_EMPLEADOS && empleados[i] != NULL){
-        if (empleados[i]->ci == ci){
+        if (empleados[i]->getCi == ci){
             throw invalid_argument("Persona ya registrada");
         }
         i++;
@@ -34,7 +34,8 @@ void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
     }
     Empleado* nuevoEmpleado = new Empleado(ci, nombre, apellido, dir);
     empleados[i++] = nuevoEmpleado;
-    empleados[i] = NULL;
+    if(i != MAX_EMPLEADOS)
+        empleados[i] = NULL;
 };
 
 
@@ -46,7 +47,7 @@ En caso de ya existir, levanta una excepción std::invalid_argument.
 void agregarEmpresa(DtEmpresa * empresa){
     int i = 0;
     while (i < MAX_EMPRESAS && empresas[i] != NULL){
-        if (empresas[i]->id == empresa->id){
+        if (empresas[i]->GetId == empresa->GetId){
             throw invalid_argument("Empresa ya registrada");
         }
         i++;
@@ -55,7 +56,8 @@ void agregarEmpresa(DtEmpresa * empresa){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
     empresas[i++] = empresa;
-    empresas[i] = NULL;
+    if(i != MAX_EMPRESAS)
+        empresas[i] = NULL;
 };
 
 
@@ -64,23 +66,24 @@ c) DtEmpleado** listarEmpleados(int & cantEmpleados)
 Retorna un arreglo de DtEmpleado* con todos los empleados del sistema. 
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
-DtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] = NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
+dtEmpleado** listarEmpleados(int & cantEmpleados){
+    if(empleados[0] == NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
         cout<<"error"<< endl;
         return NULL;
     }
     dtEmpleado** ArreEmpl = new dtEmpleado*[cantEmpleados];
     int i = 0;
-    float sueldoLiquidoTotal = 0.0;
+    float sueldoLiquidoTotal = 0.0;;
     Empleado* empleado;
     while(i < cantEmpleados && empleados[i] != NULL){
         empleado = empleados[i];
-        for (int j = 0; j < MAX_RELACIONES ; j++) {
-            if(empleados[i]->Relaciones[j] =! NULL && empleado->Relaciones[j]->getFechaDesvinculacion() == NULL)
-                sueldoLiquidoTotal += empleado->Relaciones[j]->getSueldoLiquido();
+        for (int j = 0; j < MAX_RELACIONES && empleados[i]->getRel(j) != NULL; j++) {
+            if(empleado->getRel(j)->getFechaDesvinculacion() == NULL)
+                sueldoLiquidoTotal += empleado->getRel(j)->getSueldoLiquido();
         }
         ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), *(empleado->getDir()), sueldoLiquidoTotal);
         i++;
+        sueldoLiquidoTotal = 0.0;
     };
     return ArreEmpl;
 };

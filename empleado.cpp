@@ -81,6 +81,10 @@ Direccion* Empleado::getDir(){
     return this->direccion;
 };
 
+RelacionLaboral* Empleado::getRel(int num){
+    return this->Relaciones[num];
+};
+
 
 // Destructor:
 Empleado::~Empleado(){

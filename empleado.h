@@ -24,6 +24,7 @@ class Empleado {
 		string getApe();
 		string getCi();
 		Direccion* getDir();
+		RelacionLaboral* getRel(int);
 		~Empleado();
 	private:
 		string ci;
