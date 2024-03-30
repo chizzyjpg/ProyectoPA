@@ -7,8 +7,8 @@
 #include "./DataTypes/dtExtranjera.h"
 #include "./DataTypes/dtNacional.h"
 
-const Empleado** empleados [MAX_EMPLEADOS];
-const DtEmpresa** empresas [MAX_EMPRESAS];
+Empleado* empleados [MAX_EMPLEADOS];
+DtEmpresa* empresas [MAX_EMPRESAS];
 
 int main(){
     empleados[0] = NULL;
@@ -21,10 +21,10 @@ a) void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir
 Crea un nuevo empleado en el sistema.
 En caso de ya existir, levanta la excepción std::invalid_argument.
 */
-void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
+void agregarEmpleado(string ci, string nombre, string apellido, Direccion* dir){
     int i = 0;
     while (i < MAX_EMPLEADOS && empleados[i] != NULL){
-        if (empleados[i]->ci == ci){
+        if (empleados[i]->getCi() == ci){
             throw invalid_argument("Persona ya registrada");
         }
         i++;
@@ -33,9 +33,9 @@ void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir){
         throw invalid_argument("Maximo de personas alcanzado");
     }
     Empleado* nuevoEmpleado = new Empleado(ci, nombre, apellido, dir);
-    empleados[i++] = nuevoEmpleado;
-    empleados[i] = NULL;
-};
+    empleados[i] = nuevoEmpleado;
+    empleados[++i] = NULL; // Incrementar i antes de asignar NULL
+}
 
 
 /*
@@ -46,7 +46,7 @@ En caso de ya existir, levanta una excepción std::invalid_argument.
 void agregarEmpresa(DtEmpresa * empresa){
     int i = 0;
     while (i < MAX_EMPRESAS && empresas[i] != NULL){
-        if (empresas[i]->id == empresa->id){
+        if (empresas[i]->GetId() == empresa->GetId()){
             throw invalid_argument("Empresa ya registrada");
         }
         i++;
@@ -64,8 +64,8 @@ c) DtEmpleado** listarEmpleados(int & cantEmpleados)
 Retorna un arreglo de DtEmpleado* con todos los empleados del sistema. 
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
-DtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] = NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
+dtEmpleado** listarEmpleados(int & cantEmpleados){
+    if(empleados[0] == NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
         cout<<"error"<< endl;
         return NULL;
     }
@@ -76,7 +76,7 @@ DtEmpleado** listarEmpleados(int & cantEmpleados){
     while(i < cantEmpleados && empleados[i] != NULL){
         empleado = empleados[i];
         for (int j = 0; j < MAX_RELACIONES ; j++) {
-            if(empleados[i]->Relaciones[j] =! NULL && empleado->Relaciones[j]->getFechaDesvinculacion() == NULL)
+            if(empleados[i]->Relaciones[j] =! NULL && empleado->Relaciones[j]->getFechaDesvinculacion() == NULL) //hay que reparar a partir de esta linea
                 sueldoLiquidoTotal += empleado->Relaciones[j]->getSueldoLiquido();
         }
         ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), *(empleado->getDir()), sueldoLiquidoTotal);
@@ -84,13 +84,13 @@ DtEmpleado** listarEmpleados(int & cantEmpleados){
     };
     return ArreEmpl;
 };
-
+      
 /*
 d) void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo)
 Vincula un empleado con una empresa. 
 Si la empresa ya está dentro de las empresas que el empleado ha trabajado o trabaja se levanta una excepción std::invalid_argument.
 */
-void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
+void agregarRelacionLaboral(string ciEmpleado, string idEmpresa, float sueldo){
     int numEmpleado = 0;
     while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->ci != ciEmpleado){
         numEmpleado++;
@@ -105,7 +105,7 @@ void agregarRelacionLaboral(String ciEmpleado, string idEmpresa, float sueldo){
     if(empresas[numEmpresa] == NULL || numEmpresa == MAX_EMPRESAS){
         throw invalid_argument("No se encontró a la empresa");
     }
-    for(int i=0;empleados[numEmpleado]->Relaciones[i] =! NULL && i < MAX_RELACIONES;i++){
+    for(int i=0;empleados[numEmpleado]->Relaciones[i] != NULL && i < MAX_RELACIONES;i++){
         if(empleados[numEmpleado]->Relaciones[i]->getEmpresa()->GetId()==idEmpresa)
             throw invalid_argument("Ya trabajo en esta empresa");
     }
