@@ -1,9 +1,9 @@
 #define MAX_EMPLEADOS 100
 #define MAX_EMPRESAS 100
 
+#include "empresa.h"
 #include "empleado.h"
 #include "relacion_laboral.h"
-#include "empresa.h"
 #include "./DataTypes/dtEmpleado.h"
 #include "./DataTypes/dtExtranjera.h"
 #include "./DataTypes/dtNacional.h"
@@ -56,7 +56,7 @@ void agregarEmpresa(DtEmpresa * empresa){
     if(i == MAX_EMPRESAS){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
-    Empresa * nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
+    Empresa* nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
     empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
