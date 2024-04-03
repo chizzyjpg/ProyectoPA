@@ -7,8 +7,8 @@
 #include "./DataTypes/dtExtranjera.h"
 #include "./DataTypes/dtNacional.h"
 
-Empleado* empleados [MAX_EMPLEADOS];
-DtEmpresa* empresas [MAX_EMPRESAS];
+Empleado** empleados = new Empleado* [MAX_EMPLEADOS];
+Empresa** empresas = new Empresa* [MAX_EMPRESAS];
 
 int main(){
     empleados[0] = NULL;
@@ -55,7 +55,9 @@ void agregarEmpresa(DtEmpresa * empresa){
     if(i == MAX_EMPRESAS){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
-    empresas[i++] = empresa;
+    if ()
+    Empresa * nuevaEmpresa = new Empresa(empresa->id, empresa->dir);
+    empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
 };
@@ -67,11 +69,11 @@ Retorna un arreglo de DtEmpleado* con todos los empleados del sistema.
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
 dtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] == NULL || (cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS)){
+    if(empleados[0] == NULL || cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS){
         cout<<"error"<< endl;
         return NULL;
     }
-    dtEmpleado** ArreEmpl = new dtEmpleado*[cantEmpleados];
+    dtEmpleado** ArreEmpl = new dtEmpleado *[cantEmpleados];
     int i = 0;
     float sueldoLiquidoTotal = 0.0;;
     Empleado* empleado;
@@ -81,7 +83,7 @@ dtEmpleado** listarEmpleados(int & cantEmpleados){
             if(empleado->getRel(j)->getFechaDesvinculacion() == NULL)
                 sueldoLiquidoTotal += empleado->getRel(j)->getSueldoLiquido();
         }
-        ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), *(empleado->getDir()), sueldoLiquidoTotal);
+        ArreEmpl[i] = new dtEmpleado(empleado->getCi(), empleado->getNom(), empleado->getApe(), empleado->getDir(), sueldoLiquidoTotal);
         i++;
         sueldoLiquidoTotal = 0.0;
     };
@@ -102,7 +104,7 @@ void agregarRelacionLaboral(string ciEmpleado, string idEmpresa, float sueldo){
         throw invalid_argument("No se encontró al empleado");
     }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->GetId != idEmpresa){
+    while (numEmpresa < MAX_EMPRESAS && empresas[numEmpresa] != NULL && empresas[numEmpresa]->GetId() != idEmpresa){
         numEmpresa++;
     }
     if(numEmpresa == MAX_EMPRESAS || empresas[numEmpresa] == NULL){
@@ -121,20 +123,20 @@ void agregarRelacionLaboral(string ciEmpleado, string idEmpresa, float sueldo){
 e) void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación)
 Desvincula al empleado de la empresa, registrando la fecha en que terminó el vinculo.
 */
-void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha desvinculación){
+void finalizarRelacionLaboral(string ciEmpleado, string idEmpresa, Fecha* desvinculación){
     int numEmpleado = 0;
-    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi != ciEmpleado){
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi() != ciEmpleado){
         numEmpleado++;
     };
     if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
     int numEmpresa = 0;
-    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->getRel(numEmpresa) != NULL && empleados[numEmpleado]->getRel(numEmpresa)->getEmpresa()->GetId != idEmpresa){
+    while (numEmpresa < MAX_RELACIONES && empleados[numEmpleado]->getRel(numEmpresa) != NULL && empleados[numEmpleado]->getRel(numEmpresa)->getEmpresa()->GetId() != idEmpresa){
         numEmpresa++;
     };
     if(numEmpresa == MAX_RELACIONES || empleados[numEmpleado]->getRel(numEmpresa) == NULL){
-        throw invalid_argument("No se encontró al empleado");
+        throw invalid_argument("No se encontró la empresa");
     }
     empleados[numEmpleado]->getRel(numEmpresa)->setFechaDesvinculacion(desvinculación);
 };
@@ -147,16 +149,19 @@ El largo del arreglo de empresas está dado por el parámetro cantEmpresas.
 */
 DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas){
     int numEmpleado = 0;
-    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi != ciEmpleado){
+    while (numEmpleado < MAX_EMPLEADOS && empleados[numEmpleado] != NULL && empleados[numEmpleado]->getCi() != ciEmpleado){
         numEmpleado++;
     };
     if(numEmpleado == MAX_EMPLEADOS || empleados[numEmpleado] == NULL){
         throw invalid_argument("No se encontró al empleado");
     }
+    if(cantEmpresas < 1 || cantEmpresas > MAX_RELACIONES){
+        throw invalid_argument("Seleccione un número válido");
+    }
     DtEmpresa** empresasEmpleado = new DtEmpresa*[cantEmpresas];
     int contadorEmpresas = 0;
     Empresa* empresa;
-    for (int j = 0; j < MAX_RELACIONES && empleados[numEmpleado]->getRel(j) != NULL; j++){
+    for (int j = 0; j < cantEmpresas && empleados[numEmpleado]->getRel(j) != NULL; j++){
         if(empleados[numEmpleado]->getRel(j)->getFechaDesvinculacion() == NULL){
             empresa = empleados[numEmpleado]->getRel(j)->getEmpresa();
             if (dynamic_cast<Nacional*>(empresa) != NULL) {
@@ -170,14 +175,4 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
         }
     }
     return empresasEmpleado;
-}
-
-
-
-/*
-Nota: A los efectos de este laboratorio, la función main mantendrá una colección de
-empleados, implementada como un arreglo de tamaño MAX_EMPLEADOS. 
-Lo mismo para las empresas del sistema con un máximo de MAX_EMPRESAS (ambas constantes). 
-Puede implementar operaciones en las clases dadas en el modelo si
-considera que le facilitan para la resolución de las operaciones pedidas en el main.
-*/
+};
