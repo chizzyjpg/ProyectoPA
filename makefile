@@ -4,22 +4,22 @@ all: Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o em
 
 # Data types
 Fecha.o:
-	g++ -c ./DataTypes/Fecha.cpp
+	g++ -c "DataTypes/Fecha.cpp"
 
 Direccion.o:
-	g++ -c ./DataTypes/direccion.cpp
+	g++ -c "DataTypes/direccion.cpp"
 
 DtEmpleado.o:
-	g++ -c ./DataTypes/dtEmpleado.cpp
+	g++ -c "DataTypes/dtEmpleado.cpp"
 
 DtEmpresa.o:
-	g++ -c ./DataTypes/dtEmpresa.cpp
+	g++ -c "DataTypes/dtEmpresa.cpp"
 
 DtExtranjera.o: DtEmpresa.o
-	g++ -c ./DataTypes/dtExtranjera.cpp
+	g++ -c "DataTypes/dtExtranjera.cpp"
 
 DtNacional.o: DtEmpresa.o
-	g++ -c ./DataTypes/dtNacional.cpp
+	g++ -c "DataTypes/dtNacional.cpp"
 
 
 # Clases
