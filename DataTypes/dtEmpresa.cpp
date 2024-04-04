@@ -35,6 +35,6 @@ ostream& operator<<(ostream& os, DtEmpresa* emp){
         DtExtranjera * extr = (DtExtranjera*)emp;
         string nombreFantasia = extr->GetNombre();
         os << "Nombre Fantasia: " << nombreFantasia;
-
     }
+    return os;
 }
