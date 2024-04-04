@@ -10,11 +10,115 @@
 Empleado** empleados = new Empleado* [MAX_EMPLEADOS];
 Empresa** empresas = new Empresa* [MAX_EMPRESAS];
 
+void agregarEmpleado(string, string, string, Direccion*);
+void agregarEmpresa(DtEmpresa*);
+dtEmpleado** listarEmpleados(int&);
+void agregarRelacionLaboral(string, string, float);
+void finalizarRelacionLaboral(string, string, Fecha*);
+DtEmpresa** obtenerInfoEmpresaPorEmpleado(string, int&);
+
+
+
 int main(){
     empleados[0] = NULL;
     empresas[0] = NULL;
+    int opcion;
+    bool salir = false;
+    while (!salir) {
+        cout << "Seleccione una opción:" << endl;
+        cout << "1. Agregar Empleado" << endl;
+        cout << "2. Agregar Empresa" << endl;
+        cout << "3. Listar Empleados" << endl;
+        cout << "4. Agregar Relación Laboral" << endl;
+        cout << "5. Finalizar Relación Laboral" << endl;
+        cout << "6. Obtener Información de Empresa por Empleado" << endl;
+        cout << "7. Salir" << endl;
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                string ci, nombre, apellido;
+                Direccion dir;
+                cout << "Ingrese CI: ";
+                cin >> ci;
+                cout << "Ingrese Nombre: ";
+                cin >> nombre;
+                cout << "Ingrese Apellido: ";
+                cin >> apellido;
+                // HACER DIRECCION
+                agregarEmpleado(ci, nombre, apellido, dir);
+                break;
+            }
+            case 2: {
+                string id;
+                Direccion dir;
+                cout << "Ingrese id de la empresa: ";
+                cin >> id;
+                // HACER DIRECCION
+                //HACER PARA NACIONAL O EXTRANJERA
+                DtEmpresa* nuevaEmpresa = new DtEmpresa(id, dir);//FALTA COSA
+                agregarEmpresa(nuevaEmpresa);
+                break;
+            }
+            case 3: {
+                int cantEmpleados;
+                cout << "Indique la cantidad de empleados que desea ver: ";
+                cin >> cantEmpleados;
+                dtEmpleado** empleados = listarEmpleados(cantEmpleados);
+                for (int i = 0; i < cantEmpleados; ++i){
+                    cout<<"Empleado: "<<empleados[i]->getNombre()<<", "<<empleados[i]->getApellido()<<", "<<empleados[i]->getCi()<<endl;//CREO ASI ESTA BIEN?
+                }
+                // BORRAR EL COSO
+                break;
+            }
+            case 4: {
+                string ci, id;
+                float sueldo;
+                cout << "Ingrese ci del empleado: ";
+                cin >> ci;
+                cout << "Ingrese id de la empresa: ";
+                cin >> id;
+                cout << "Ingrese sueldo: ";
+                cin >> sueldo;
+                agregarRelacionLaboral(ci, id, sueldo);
+                break;
+            }
+            case 5: {
+                string ci, id;
+                Fecha desvinculacion;
+                cout << "Ingrese ci del empleado: ";
+                cin >> ci;
+                cout << "Ingrese id de la empresa: ";
+                cin >> id;
+                //HACER FECHA
+                finalizarRelacionLaboral(ci, id, desvinculacion);
+                break;
+            }
+            case 6: {
+                string ci;
+                int cantEmpresas;
+                cout << "Ingrese ci del empleado: ";
+                cin >> ci;
+                DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
+                for (int i = 0; i < cantEmpresas; ++i) {
+                    cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
+                }
+                break;
+            }
+            case 7: {
+                salir = true;
+                break;
+            }
+            default: {
+                cout << "Opción no válida. Por favor, seleccione una opción válida." << endl;
+                break;
+            }
+        }
+    }
     return 0;
 };
+
+
 
 /*
 a) void agregarEmpleado(string ci, string nombre, string apellido, Direccion dir) 
