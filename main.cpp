@@ -282,6 +282,7 @@ dtEmpleado** listarEmpleados(int & cantEmpleados){
         i++;
         sueldoLiquidoTotal = 0.0;
     };
+    cantEmpleados = i;
     return ArreEmpl;
 };
       
