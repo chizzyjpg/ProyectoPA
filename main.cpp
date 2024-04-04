@@ -21,7 +21,6 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string, int&);
 
 Direccion * pedirDireccion();
 void pedirEnter();
-void imprimirDireccion(Direccion*);
 
 int main(){
     empleados[0] = NULL;
@@ -412,8 +411,4 @@ void pedirEnter(){
     string x;
     cin >> x;
     system("clear");
-}
-
-void imprimirDireccion(Direccion * dir){
-    cout << dir->getPais() << ", " << dir->getCiudad() << ": " << dir->getCalle() << " Nro " << dir->getNumero();
 }
