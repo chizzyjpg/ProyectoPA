@@ -34,5 +34,5 @@ float dtEmpleado::getSueldoLiquido(){
 
 // Destructor:
 dtEmpleado::~dtEmpleado(){
-    cout << "Se elimino al empleado..." << endl;
+
 };

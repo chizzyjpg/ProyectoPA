@@ -21,6 +21,7 @@ void finalizarRelacionLaboral(string, string, Fecha*);
 DtEmpresa** obtenerInfoEmpresaPorEmpleado(string, int&);
 
 Direccion * pedirDireccion();
+void pedirEnter();
 
 int main(){
     empleados[0] = NULL;
@@ -49,6 +50,7 @@ int main(){
                 cin >> apellido;           
                 Direccion *dir = pedirDireccion();
                 agregarEmpleado(ci, nombre, apellido, dir);
+                pedirEnter();
                 break;
             }
             case 2: {
@@ -56,7 +58,6 @@ int main(){
                 cout << "Ingrese id de la empresa: ";
                 cin >> id;
                 Direccion* dir = pedirDireccion();
-                //HACER PARA NACIONAL O EXTRANJERA
                 string expression="0";
                 DtEmpresa *nuevaEmpresa;
                 while (expression != "1" && expression != "2"){
@@ -64,43 +65,21 @@ int main(){
                     cout<<"1. Nacional"<<endl;
                     cout<<"2. Extranjera"<<endl;
                     cin>>expression;
-                    string expression = "1";
-                    if (expression == "1") {
-                        //Nacional
+                    if (expression == "1") { // Nacional
                         string RUT;
-                        cout<<"Ingrese el RUT: ";
-                        cin>>RUT;
-                        nuevaEmpresa=new DtNacional(id,dir,RUT);
-                    } else if (expression == "2") {
-                        //Extranjera
+                        cout << "Ingrese el RUT: ";
+                        cin >> RUT;
+                        nuevaEmpresa = new DtNacional(id, dir, RUT);
+                    } else if (expression == "2") { // Extranjera
                         string nombre;
                         cout<<"Ingrese el nombre: ";
                         cin>>nombre;
                         nuevaEmpresa=new DtExtranjera(id,dir,nombre);
                     } else
                         cout<<"Opcion no Valida..."<<endl;
-                    /*
-                    switch (expression){
-                    case "1":
-                        //Nacional
-                        string RUT;
-                        cout<<"Ingrese el RUT: ";
-                        cin>>RUT;
-                        nuevaEmpresa=new DtNacional(id,dir,RUT);
-                        break;
-                    case 2:   
-                        //Extranjera
-                        string nombre;
-                        cout<<"Ingrese el nombre: ";
-                        cin>>nombre;
-                        nuevaEmpresa=new DtExtranjera(id,dir,nombre);
-                        break;
-                    default:
-                        cout<<"Opcion no Valida..."<<endl;
-                        break;
-                    }*/
                 }    
                 agregarEmpresa(nuevaEmpresa);
+                pedirEnter();
                 break;
             }
             case 3: {
@@ -108,14 +87,14 @@ int main(){
                 cout << "Indique la cantidad de empleados que desea ver: ";
                 cin >> cantEmpleados;
                 dtEmpleado** empleados = listarEmpleados(cantEmpleados);
-                for (int i = 0; i < cantEmpleados; ++i){
-                    cout<<"Empleado: "<<empleados[i]->getNombre()<<", "<<empleados[i]->getApellido()<<", "<<empleados[i]->getCi()<<endl;//CREO ASI ESTA BIEN?
+                for (int i = 0; i < cantEmpleados; i++){
+                    cout<<"Empleado: " << empleados[i]->getNombre() << ", " << empleados[i]->getApellido() << ", " << empleados[i]->getCi() << endl;
                 }
-                // BORRAR EL COSO
                 for (int i = 0; i < cantEmpleados; ++i) {
                     delete empleados[i];
                 }
                 delete[] empleados;
+                pedirEnter();
                 break;
             }
             case 4: {
@@ -128,6 +107,7 @@ int main(){
                 cout << "Ingrese sueldo: ";
                 cin >> sueldo;
                 agregarRelacionLaboral(ci, id, sueldo);
+                pedirEnter();
                 break;
             }
             case 5: {
@@ -145,6 +125,7 @@ int main(){
                 cin>>a;
                 Fecha *desvinculacion=new Fecha(d,m,a);
                 finalizarRelacionLaboral(ci, id, desvinculacion);
+                pedirEnter();
                 break;
             }
             case 6: {
@@ -163,6 +144,7 @@ int main(){
                     delete empresas[i];
                 }
                 delete[] empresas;
+                pedirEnter();
                 break;
             }
             case 7: {
@@ -367,4 +349,11 @@ Direccion * pedirDireccion(){
     cin >> numero;
     Direccion *dir = new Direccion(pais, ciud, calle, numero);
     return dir;
+}
+
+void pedirEnter(){
+    cout << "\n\n\n\nPresione enter para continuar...\n";
+    string x;
+    cin >> x;
+    system("clear");
 }
