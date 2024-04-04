@@ -66,19 +66,23 @@ int main(){
                 cout << "Ingrese id de la empresa: ";
                 cin >> id;
                 // DIRECCION
+                string pais;
                 cout<< "Ingrese Pais: "<<endl;
                 cin >> pais;
+                string ciud;
                 cout<< "Ingrese Ciudad: "<<endl;
                 cin >> ciud;
+                string calle;
                 cout<< "Ingrese Calle: "<<endl;
                 cin >> calle;
+                string numero;
                 cout<< "Ingrese Numero: "<<endl;
                 cin >> numero;
-                Direccion *dir=new Direccion(pais,ciud,calle,numero);
+                dir = new Direccion(pais,ciud,calle,numero);
                 //HACER PARA NACIONAL O EXTRANJERA
                 string expression="0";
                 DtEmpresa *nuevaEmpresa;
-                while (expression != 1 && expression != 2){
+                while (expression != "1" && expression != "2"){
                     cout<<"Seleccione el tipo de Empresa: "<<endl;
                     cout<<"1. Nacional"<<endl;
                     cout<<"2. Extranjera"<<endl;
