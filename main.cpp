@@ -8,6 +8,7 @@
 #include "./DataTypes/dtEmpleado.h"
 #include "./DataTypes/dtExtranjera.h"
 #include "./DataTypes/dtNacional.h"
+#include <limits>
 
 Empleado** empleados = new Empleado* [MAX_EMPLEADOS];
 Empresa** empresas = new Empresa* [MAX_EMPRESAS];
@@ -407,8 +408,9 @@ Direccion * pedirDireccion(){
 }
 
 void pedirEnter(){
-    cout << "\n\n\n\nPresione enter para continuar...\n";
-    string x;
-    cin >> x;
+    cout << "\n\n\n\nPresione enter para continuar...";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string input;
+    getline(cin, input);
     system("clear");
 }
