@@ -1,0 +1,15 @@
+﻿1. Dependencias Circulares
+
+
+Las dependencias circulares se presentaron, entre las clases A, B y C. Por ejemplo, A necesita de la implementacion de B y C al mismo tempo que estas necesitan conocer de A y entre ellas. Esto crea una dependencia circular, ya que la definición de una clase depende de la otra que a su vez depende de la primera.
+
+
+Para poder realizar el ejercicio es necesario solucionar las dependencias circulares de A, B y C. Una posible manera de solucionarlo sería solucionar primero las dependencias de B y C en A para luego solucionar la dependencia circular de B en C. Esto sería posible mediante el uso de “Foward Declarations”.
+
+
+
+
+2. Forward Declaration
+
+
+"Forward declaration" es la manera que tenemos de manejar referencias a clases o funciones antes de que estas estén completamente definidas. Esto se usa para resolver el problema anterior de dependencias circulares. En términos prácticos, si tienes dos clases que necesitan referirse entre sí, introduces una declaración anticipada de cada clase antes de su definición completa. Esto le dice al compilador: "Esta clase existirá, pero te daré los detalles más adelante". Así, puedes tener clases que contienen punteros o referencias a otras clases que aún no están completamente definidas.
