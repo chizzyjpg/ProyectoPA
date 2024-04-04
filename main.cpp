@@ -40,15 +40,23 @@ int main(){
 
         switch (opcion) {
             case 1: {
-                string ci, nombre, apellido;
-                Direccion *dir;
-                cout << "Ingrese CI: ";
+                string ci, nombre, apellido,pais,ciud,calle,numero;
+                cout << "Ingrese CI: "<<endl;
                 cin >> ci;
-                cout << "Ingrese Nombre: ";
+                cout << "Ingrese Nombre: "<<endl;
                 cin >> nombre;
-                cout << "Ingrese Apellido: ";
-                cin >> apellido;
-                // HACER DIRECCION
+                cout << "Ingrese Apellido: "<<endl;
+                cin >> apellido;           
+                // DIRECCION
+                cout<< "Ingrese Pais: "<<endl;
+                cin >> pais;
+                cout<< "Ingrese Ciudad: "<<endl;
+                cin >> ciud;
+                cout<< "Ingrese Calle: "<<endl;
+                cin >> calle;
+                cout<< "Ingrese Numero: "<<endl;
+                cin >> numero;
+                Direccion *dir=new Direccion(pais,ciud,calle,numero);
                 agregarEmpleado(ci, nombre, apellido, dir);
                 break;
             }
@@ -57,9 +65,60 @@ int main(){
                 Direccion *dir;
                 cout << "Ingrese id de la empresa: ";
                 cin >> id;
-                // HACER DIRECCION
+                // DIRECCION
+                cout<< "Ingrese Pais: "<<endl;
+                cin >> pais;
+                cout<< "Ingrese Ciudad: "<<endl;
+                cin >> ciud;
+                cout<< "Ingrese Calle: "<<endl;
+                cin >> calle;
+                cout<< "Ingrese Numero: "<<endl;
+                cin >> numero;
+                Direccion *dir=new Direccion(pais,ciud,calle,numero);
                 //HACER PARA NACIONAL O EXTRANJERA
-                DtEmpresa* nuevaEmpresa = new DtEmpresa(id, dir);//FALTA COSA
+                string expression="0";
+                DtEmpresa *nuevaEmpresa;
+                while (expression != 1 && expression != 2){
+                    cout<<"Seleccione el tipo de Empresa: "<<endl;
+                    cout<<"1. Nacional"<<endl;
+                    cout<<"2. Extranjera"<<endl;
+                    cin>>expression;
+                    string expression = "1";
+                    if (expression == "1") {
+                        //Nacional
+                        string RUT;
+                        cout<<"Ingrese el RUT: ";
+                        cin>>RUT;
+                        nuevaEmpresa=new DtNacional(id,dir,RUT);
+                    } else if (expression == "2") {
+                        //Extranjera
+                        string nombre;
+                        cout<<"Ingrese el nombre: ";
+                        cin>>nombre;
+                        nuevaEmpresa=new DtExtranjera(id,dir,nombre);
+                    } else
+                        cout<<"Opcion no Valida..."<<endl;
+                    /*
+                    switch (expression){
+                    case "1":
+                        //Nacional
+                        string RUT;
+                        cout<<"Ingrese el RUT: ";
+                        cin>>RUT;
+                        nuevaEmpresa=new DtNacional(id,dir,RUT);
+                        break;
+                    case 2:   
+                        //Extranjera
+                        string nombre;
+                        cout<<"Ingrese el nombre: ";
+                        cin>>nombre;
+                        nuevaEmpresa=new DtExtranjera(id,dir,nombre);
+                        break;
+                    default:
+                        cout<<"Opcion no Valida..."<<endl;
+                        break;
+                    }*/
+                }    
                 agregarEmpresa(nuevaEmpresa);
                 break;
             }
@@ -72,6 +131,10 @@ int main(){
                     cout<<"Empleado: "<<empleados[i]->getNombre()<<", "<<empleados[i]->getApellido()<<", "<<empleados[i]->getCi()<<endl;//CREO ASI ESTA BIEN?
                 }
                 // BORRAR EL COSO
+                for (int i = 0; i < cantEmpleados; ++i) {
+                    delete empleados[i];
+                }
+                delete[] empleados;
                 break;
             }
             case 4: {
@@ -88,12 +151,18 @@ int main(){
             }
             case 5: {
                 string ci, id;
-                Fecha *desvinculacion;
-                cout << "Ingrese ci del empleado: ";
+                int d,m,a;              
+                cout << "Ingrese ci del empleado: "<<endl;
                 cin >> ci;
-                cout << "Ingrese id de la empresa: ";
+                cout << "Ingrese id de la empresa: "<<endl;
                 cin >> id;
-                //HACER FECHA
+                cout << "Ingrese el dia actual: "<<endl;
+                cin>>d;
+                cout << "Ingrese mes actual: "<<endl;
+                cin>>m;
+                cout << "Ingrese el año actual: "<<endl;
+                cin>>a;
+                Fecha *desvinculacion=new Fecha(d,m,a);
                 finalizarRelacionLaboral(ci, id, desvinculacion);
                 break;
             }
@@ -102,10 +171,17 @@ int main(){
                 int cantEmpresas;
                 cout << "Ingrese ci del empleado: ";
                 cin >> ciEmpleado;
+                cout << "Cantidad de empresas a mostrar: ";
+                cin>>cantEmpresas;
                 DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
                 for (int i = 0; i < cantEmpresas; ++i) {
                     cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
                 }
+                // BORRAR
+                for (int i = 0; i < cantEmpresas; ++i) {
+                    delete empresas[i];
+                }
+                delete[] empresas;
                 break;
             }
             case 7: {
