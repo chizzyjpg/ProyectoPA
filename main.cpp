@@ -385,5 +385,6 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
             // }
         }
     }
+    cantEmpresas = contadorEmpresas;
     return empresasEmpleado;
 };

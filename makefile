@@ -1,4 +1,4 @@
-all: fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o
+okall: fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o
 	g++ fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o -o programa
 
 
