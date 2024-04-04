@@ -253,8 +253,7 @@ El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
 dtEmpleado** listarEmpleados(int & cantEmpleados){
     if(empleados[0] == NULL || cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS){
-        cout<<"error"<< endl;
-        return NULL;
+        throw invalid_argument("cantidad de empleados invalida");
     }
     dtEmpleado** ArreEmpl = new dtEmpleado *[cantEmpleados];
     int i = 0;
