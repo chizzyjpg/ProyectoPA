@@ -2,7 +2,7 @@
 #define EXTRANJERA_H
 
 #include "empresa.h"
-
+class Empresa;
 class Extranjera: public Empresa{
     public:
         Extranjera(string Id, Direccion* Dir, string Nombre);

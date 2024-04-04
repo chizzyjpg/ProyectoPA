@@ -7,7 +7,7 @@
 #include "./DataTypes/direccion.h"
 #include "relacion_laboral.h"
 #include "./DataTypes/dtEmpleado.h"
-
+class RelacionLaboral;
 using namespace std;
 
 class Empleado {

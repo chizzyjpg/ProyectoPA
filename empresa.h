@@ -14,7 +14,7 @@ class Empresa {
         void SetDir(Direccion*);
         string GetId();
         Direccion* GetDir();
-        ~Empresa();
+        virtual ~Empresa();
     private:
         string id;
         Direccion* dir;

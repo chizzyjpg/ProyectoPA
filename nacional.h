@@ -2,6 +2,7 @@
 #define NACIONAL_H
 
 #include "empresa.h"
+class Empresa;
 
 class Nacional: public Empresa{
     public:
