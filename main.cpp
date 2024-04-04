@@ -1,6 +1,6 @@
 #define MAX_EMPLEADOS 100
 #define MAX_EMPRESAS 100
-
+// mostrar en el case 6 el rut o nombre ficticio
 #include "empresa.h"
 #include "nacional.h"
 #include "extranjera.h"
@@ -22,10 +22,31 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string, int&);
 
 Direccion * pedirDireccion();
 void pedirEnter();
+void imprimirDireccion(Direccion*);
 
 int main(){
     empleados[0] = NULL;
     empresas[0] = NULL;
+
+
+    // PRECARGA PARA PRUEBAS
+    Direccion* dir1 = new Direccion("Pais 1", "Ciudad 1", "calle 1", "1");
+    Direccion* dir2 = new Direccion("Pais 2", "Ciudad 2", "calle 2", "2");
+    Direccion* dir3 = new Direccion("Pais 3", "Ciudad 3", "calle 3", "3");
+    agregarEmpleado("1", "1", "1", dir1);
+    agregarEmpleado("2", "2", "2", dir2);
+    agregarEmpleado("3", "3", "3", dir3);
+
+    DtEmpresa* empre1 = new DtNacional("1", dir1, "1");
+    DtEmpresa* empre2 = new DtExtranjera("2", dir2, "2");
+    DtEmpresa* empre3 = new DtNacional("3", dir3, "3");
+    agregarEmpresa(empre1);
+    agregarEmpresa(empre2);
+    agregarEmpresa(empre3);
+
+
+
+
     int opcion;
     bool salir = false;
     while (!salir) {
@@ -138,12 +159,21 @@ int main(){
                 cout << "Ingrese id de la empresa: "<<endl;
                 cin >> id;
                 cout << "Ingrese el dia actual: "<<endl;
-                cin>>d;
+                cin >> d;
                 cout << "Ingrese mes actual: "<<endl;
-                cin>>m;
+                cin >> m;
                 cout << "Ingrese el año actual: "<<endl;
-                cin>>a;
-                Fecha *desvinculacion=new Fecha(d,m,a);
+                cin >> a;
+                try
+                {
+                    Fecha *desvinculacion=new Fecha(d,m,a);
+                }
+                catch(const std::exception& e)
+                {
+                    cout << "Error: ";
+                    std::cerr << e.what() << '\n';
+                }
+                
                 try{
                     finalizarRelacionLaboral(ci, id, desvinculacion);
                 } catch(const exception& e){
@@ -162,8 +192,10 @@ int main(){
                 cin>>cantEmpresas;
                 try{
                     DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
-                    for (int i = 0; i < cantEmpresas; ++i) {
-                        cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
+                    for (int i = 0; i < cantEmpresas; i++) {
+                        cout << "Empresa: " << empresas[i]->GetId() << ", ";
+                        imprimirDireccion(empresas[i]->GetDir());
+                        cout << ", " << endl;
                     }
                     for (int i = 0; i < cantEmpresas; ++i) {
                         delete empresas[i];
@@ -231,15 +263,13 @@ void agregarEmpresa(DtEmpresa * empresa){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
     Empresa* nuevaEmpresa;
-
     DtNacional * nac = (DtNacional*)empresa;
     if (nac != NULL){
-        Empresa* nuevaEmpresa = new Nacional(nac->GetId(), nac->GetDir(), nac->GetRut());
+        nuevaEmpresa = new Nacional(nac->GetId(), nac->GetDir(), nac->GetRut());
     }else{
         DtExtranjera * extr = (DtExtranjera*)empresa;
-        Empresa* nuevaEmpresa = new Extranjera(extr->GetId(), extr->GetDir(), extr->GetNombre());
+        nuevaEmpresa = new Extranjera(extr->GetId(), extr->GetDir(), extr->GetNombre());
     }
-
     empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
@@ -252,8 +282,11 @@ Retorna un arreglo de DtEmpleado* con todos los empleados del sistema.
 El largo del arreglo de empleados está dado por el parámetro cantEmpleados.
 */
 dtEmpleado** listarEmpleados(int & cantEmpleados){
-    if(empleados[0] == NULL || cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS){
+    if(cantEmpleados < 1 || cantEmpleados > MAX_EMPLEADOS){
         throw invalid_argument("cantidad de empleados invalida");
+    }
+    if(empleados[0] == NULL){
+        throw invalid_argument("No hay empleados registrados");
     }
     dtEmpleado** ArreEmpl = new dtEmpleado *[cantEmpleados];
     int i = 0;
@@ -384,4 +417,8 @@ void pedirEnter(){
     string x;
     cin >> x;
     system("clear");
+}
+
+void imprimirDireccion(Direccion * dir){
+    cout << dir->getPais() << ", " << dir->getCiudad() << ": " << dir->getCalle() << " Nro " << dir->getNumero();
 }
