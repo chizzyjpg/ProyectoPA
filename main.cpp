@@ -243,13 +243,15 @@ void agregarEmpresa(DtEmpresa * empresa){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
     Empresa* nuevaEmpresa;
-    if (typeid(*empresa) == typeid(DtNacional)){
-        Empresa* nuevaEmpresa = new Nacional(empresa->GetId(), empresa->GetDir(), empresa->GetRut());
-    }else if (typeid(*empresa) == typeid(DtExtranjera)){
-        Empresa* nuevaEmpresa = new Extranjera(empresa->GetId(), empresa->GetDir(), empresa->GetNombre());
+
+    DtNacional * nac = (DtNacional*)empresa;
+    if (nac != NULL){
+        Empresa* nuevaEmpresa = new Nacional(nac->GetId(), nac->GetDir(), nac->GetRut());
     }else{
-        Empresa* nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
+        DtExtranjera * extr = (DtExtranjera*)empresa;
+        Empresa* nuevaEmpresa = new Extranjera(extr->GetId(), extr->GetDir(), extr->GetNombre());
     }
+
     empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
@@ -364,12 +366,14 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
             //     string nombreFantasia =empresa->GetNombre();
             //     empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
             // }
-            if (typeid(*empresa) == typeid(Nacional)){
-                string rutEmpresa = empleados[numEmpleado]->getRel(j)->getEmpresa()->GetRut();
-                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
+            Nacional * nac = (Nacional*)empresa;
+            if (nac != NULL){
+                string rutEmpresa = nac->GetRut();
+                empresasEmpleado[contadorEmpresas++] = new DtNacional(empresa->GetId(), empresa->GetDir(), rutEmpresa);
             }else{
-                string nombreFantasia = empresa->GetNombre();
-                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
+                Extranjera * extr = (Extranjera*)empresa;
+                string nombreFantasia = extr->GetNombre();
+                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
             }
             // if (dynamic_cast<nacional*>(empresa) != NULL) {
             //     string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
