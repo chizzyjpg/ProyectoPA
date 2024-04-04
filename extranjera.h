@@ -3,7 +3,7 @@
 
 #include "empresa.h"
 
-class Extranjera : public Empresa{
+class Extranjera: public Empresa{
     public:
         Extranjera(string Id, Direccion* Dir, string Nombre);
         float getDescuento();

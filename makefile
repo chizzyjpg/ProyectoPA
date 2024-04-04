@@ -1,29 +1,29 @@
-all: Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o
-	g++ Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o -o programa
+all: fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o
+	g++ fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o -o programa
 
 
 # Data types
-Fecha.o:
-	g++ -c "DataTypes/Fecha.cpp"
+fecha.o:
+	g++ -c "DataTypes/fecha.cpp"
 
-Direccion.o:
+direccion.o:
 	g++ -c "DataTypes/direccion.cpp"
 
-DtEmpleado.o:
+dtEmpleado.o:
 	g++ -c "DataTypes/dtEmpleado.cpp"
 
-DtEmpresa.o:
+dtEmpresa.o:
 	g++ -c "DataTypes/dtEmpresa.cpp"
 
-DtExtranjera.o: DtEmpresa.o
+dtExtranjera.o: dtEmpresa.o
 	g++ -c "DataTypes/dtExtranjera.cpp"
 
-DtNacional.o: DtEmpresa.o
+dtNacional.o: dtEmpresa.o
 	g++ -c "DataTypes/dtNacional.cpp"
 
 
 # Clases
-empresa.o: Direccion.o
+empresa.o: direccion.o
 	g++ -c empresa.cpp
 
 nacional.o: empresa.o
@@ -32,10 +32,10 @@ nacional.o: empresa.o
 extranjera.o: empresa.o
 	g++ -c extranjera.cpp	
 
-empleado.o: Direccion.o
+empleado.o: direccion.o
 	g++ -c empleado.cpp	
 	
-relacion_laboral.o: empresa.o empleado.o Fecha.o
+relacion_laboral.o: empresa.o empleado.o fecha.o
 	g++ -c relacion_laboral.cpp	
 
 
@@ -44,7 +44,7 @@ main.o:
 
 
 clean:
-	rm -f Fecha.o Direccion.o DtEmpleado.o DtEmpresa.o DtExtranjera.o DtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o programa
+	rm -f fecha.o direccion.o dtEmpleado.o dtEmpresa.o dtExtranjera.o dtNacional.o empresa.o nacional.o extranjera.o empleado.o relacion_laboral.o main.o programa
 run:
 	make clean
 	make

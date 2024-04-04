@@ -2,6 +2,8 @@
 #define MAX_EMPRESAS 100
 
 #include "empresa.h"
+#include "nacional.h"
+#include "extranjera.h"
 #include "empleado.h"
 #include "relacion_laboral.h"
 #include "./DataTypes/dtEmpleado.h"
@@ -56,7 +58,14 @@ void agregarEmpresa(DtEmpresa * empresa){
     if(i == MAX_EMPRESAS){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
-    Empresa* nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
+    Empresa* nuevaEmpresa;
+    if (typeid(*empresa) == typeid(DtNacional)){
+        Empresa* nuevaEmpresa = new Nacional(empresa->GetId(), empresa->GetDir(), empresa->GetRut());
+    }else if (typeid(*empresa) == typeid(DtExtranjera)){
+        Empresa* nuevaEmpresa = new Extranjera(empresa->GetId(), empresa->GetDir(), empresa->GetNombre());
+    }else{
+        Empresa* nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
+    }
     empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
@@ -164,20 +173,27 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
     for (int j = 0; j < cantEmpresas && empleados[numEmpleado]->getRel(j) != NULL; j++){
         if(empleados[numEmpleado]->getRel(j)->getFechaDesvinculacion() == NULL){
             empresa = empleados[numEmpleado]->getRel(j)->getEmpresa();
-            try {
-                string rutEmpresa = empresa->GetRut();
-                empresasEmpleado[contadorEmpresas++] = new DtNacional(empresa->GetId(), empresa->GetDir(), rutEmpresa);
-            }catch(int e){
-                string nombreFantasia =empresa->GetNombre();
-                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
+            // try {
+            //     string rutEmpresa = empresa->GetRut();
+            //     empresasEmpleado[contadorEmpresas++] = new DtNacional(empresa->GetId(), empresa->GetDir(), rutEmpresa);
+            // }catch(int e){
+            //     string nombreFantasia =empresa->GetNombre();
+            //     empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
+            // }
+            if (typeid(*empresa) == typeid(Nacional)){
+                string rutEmpresa = empleados[numEmpleado]->getRel(j)->getEmpresa()->GetRut();
+                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
+            }else{
+                string nombreFantasia = empresa->GetNombre();
+                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
             }
-            // if (dynamic_cast<Nacional*>(empresa) != NULL) {
+            // if (dynamic_cast<nacional*>(empresa) != NULL) {
             //     string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
-            //     empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
+            //     empresasEmpleado[contadorEmpresas++] = new Nacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
             // } 
             // else if (dynamic_cast<Extranjera*>(empresa) != NULL) {
             //     string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
-            //     empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
+            //     empresasEmpleado[contadorEmpresas++] = new Extranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
             // }
         }
     }

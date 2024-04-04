@@ -1,7 +1,7 @@
 #ifndef REL_LABORAL
 #define REL_LABORAL
 #include "empresa.h"
-#include "./DataTypes/Fecha.h"
+#include "./DataTypes/fecha.h"
 
 
 class RelacionLaboral {

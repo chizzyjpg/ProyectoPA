@@ -31,6 +31,9 @@ Direccion* Empresa::GetDir(){
     return this->dir;
 };
 
+float getDescuento(){
+    return 0;
+}
 // Destructor:
 Empresa::~Empresa() {
     cout << "Fundio" << endl;

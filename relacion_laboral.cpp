@@ -10,7 +10,8 @@ RelacionLaboral::RelacionLaboral(float Sue, Empresa* Empre){
 
 // Funcionalidad:
 float RelacionLaboral::getSueldoLiquido (){
-    return (this->getSueldo() * this->empresa->getDescuento());
+    return 0;
+    // return (this->getSueldo() * this->empresa->getDescuento());
 };
 
 
