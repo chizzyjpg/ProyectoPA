@@ -1,6 +1,7 @@
 #define MAX_EMPLEADOS 100
 #define MAX_EMPRESAS 100
 
+#include "empresa.h"
 #include "empleado.h"
 #include "relacion_laboral.h"
 #include "./DataTypes/dtEmpleado.h"
@@ -159,8 +160,7 @@ void agregarEmpresa(DtEmpresa * empresa){
     if(i == MAX_EMPRESAS){
         throw invalid_argument("Maximo de empresas alcanzado");
     }
-    if ()
-    Empresa * nuevaEmpresa = new Empresa(empresa->id, empresa->dir);
+    Empresa* nuevaEmpresa = new Empresa(empresa->GetId(), empresa->GetDir());
     empresas[i++] = nuevaEmpresa;
     if(i != MAX_EMPRESAS)
         empresas[i] = NULL;
@@ -268,14 +268,21 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
     for (int j = 0; j < cantEmpresas && empleados[numEmpleado]->getRel(j) != NULL; j++){
         if(empleados[numEmpleado]->getRel(j)->getFechaDesvinculacion() == NULL){
             empresa = empleados[numEmpleado]->getRel(j)->getEmpresa();
-            if (dynamic_cast<Nacional*>(empresa) != NULL) {
-                string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
-                empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
-            } 
-            else if (dynamic_cast<Extranjera*>(empresa) != NULL) {
-                string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
-                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
+            try {
+                string rutEmpresa = empresa->GetRut();
+                empresasEmpleado[contadorEmpresas++] = new DtNacional(empresa->GetId(), empresa->GetDir(), rutEmpresa);
+            }catch(int e){
+                string nombreFantasia =empresa->GetNombre();
+                empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
             }
+            // if (dynamic_cast<Nacional*>(empresa) != NULL) {
+            //     string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
+            //     empresasEmpleado[contadorEmpresas++] = new DtNacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
+            // } 
+            // else if (dynamic_cast<Extranjera*>(empresa) != NULL) {
+            //     string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
+            //     empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
+            // }
         }
     }
     return empresasEmpleado;

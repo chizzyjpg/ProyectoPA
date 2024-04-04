@@ -3,7 +3,7 @@
 
 // Constructores: 
 Fecha::Fecha (){
-    this -> dia = this -> mes = this -> anio = NULL;
+    this -> dia = this -> mes = this -> anio = 0;
 }
 
 Fecha::Fecha (int d, int m, int a){

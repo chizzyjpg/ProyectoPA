@@ -7,16 +7,16 @@ using namespace std;
 
 class dtEmpleado{
     public:
-        dtEmpleado(string ci, string nom, string ap, Direccion dir, float sueldo);
+        dtEmpleado(string ci, string nom, string ap, Direccion *dir, float sueldo);
         string getCi();
         string getNombre();
         string getApellido();
-        Direccion getDireccion();
+        Direccion* getDireccion();
         float getSueldoLiquido();
         ~dtEmpleado();
     private:
         string ci, nombre, apellido;
-        Direccion direccion;
+        Direccion *direccion;
         float sueldoLiquido;
 };
 

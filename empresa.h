@@ -5,11 +5,11 @@
 #include "./DataTypes/direccion.h"
 using namespace std;
 
-class Empresa{
+class Empresa {
     public:
         Empresa();
         Empresa(string Id, Direccion* Dir);
-        virtual float getDescuento()=0;
+        virtual float getDescuento();
         void SetId(string);
         void SetDir(Direccion*);
         string GetId();

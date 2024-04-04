@@ -1,7 +1,7 @@
 #include "dtEmpleado.h"
 
 // Constructor:
-dtEmpleado::dtEmpleado(string ci, string nom, string ap, Direccion dir, float sueldo){
+dtEmpleado::dtEmpleado(string ci, string nom, string ap, Direccion* dir, float sueldo){
     this->ci = ci;
     this->nombre = nom;
     this->apellido = ap;
@@ -23,7 +23,7 @@ string dtEmpleado::getApellido(){
     return this->apellido;
 };
 
-Direccion dtEmpleado::getDireccion(){
+Direccion* dtEmpleado::getDireccion(){
     return this->direccion;
 };
 
