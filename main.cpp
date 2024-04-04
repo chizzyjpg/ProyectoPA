@@ -40,7 +40,7 @@ int main(){
 
         switch (opcion) {
             case 1: {
-                string ci, nombre, apellido,pais,ciud,calle,numero;
+                string ci, nombre, apellido;
                 cout << "Ingrese CI: "<<endl;
                 cin >> ci;
                 cout << "Ingrese Nombre: "<<endl;
