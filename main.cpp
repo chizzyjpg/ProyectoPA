@@ -39,7 +39,7 @@ int main(){
         switch (opcion) {
             case 1: {
                 string ci, nombre, apellido;
-                Direccion dir;
+                Direccion *dir;
                 cout << "Ingrese CI: ";
                 cin >> ci;
                 cout << "Ingrese Nombre: ";
@@ -52,7 +52,7 @@ int main(){
             }
             case 2: {
                 string id;
-                Direccion dir;
+                Direccion *dir;
                 cout << "Ingrese id de la empresa: ";
                 cin >> id;
                 // HACER DIRECCION
@@ -86,7 +86,7 @@ int main(){
             }
             case 5: {
                 string ci, id;
-                Fecha desvinculacion;
+                Fecha *desvinculacion;
                 cout << "Ingrese ci del empleado: ";
                 cin >> ci;
                 cout << "Ingrese id de la empresa: ";
@@ -96,10 +96,10 @@ int main(){
                 break;
             }
             case 6: {
-                string ci;
+                string ciEmpleado;
                 int cantEmpresas;
                 cout << "Ingrese ci del empleado: ";
-                cin >> ci;
+                cin >> ciEmpleado;
                 DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
                 for (int i = 0; i < cantEmpresas; ++i) {
                     cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
