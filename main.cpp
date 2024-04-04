@@ -49,7 +49,12 @@ int main(){
                 cout << "Ingrese Apellido: "<<endl;
                 cin >> apellido;           
                 Direccion *dir = pedirDireccion();
-                agregarEmpleado(ci, nombre, apellido, dir);
+                try{
+                    agregarEmpleado(ci, nombre, apellido, dir);
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
+                }
                 pedirEnter();
                 break;
             }
@@ -77,8 +82,13 @@ int main(){
                         nuevaEmpresa=new DtExtranjera(id,dir,nombre);
                     } else
                         cout<<"Opcion no Valida..."<<endl;
+                }
+                try{
+                    agregarEmpresa(nuevaEmpresa);
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
                 }    
-                agregarEmpresa(nuevaEmpresa);
                 pedirEnter();
                 break;
             }
@@ -86,14 +96,19 @@ int main(){
                 int cantEmpleados;
                 cout << "Indique la cantidad de empleados que desea ver: ";
                 cin >> cantEmpleados;
-                dtEmpleado** empleados = listarEmpleados(cantEmpleados);
-                for (int i = 0; i < cantEmpleados; i++){
-                    cout<<"Empleado: " << empleados[i]->getNombre() << ", " << empleados[i]->getApellido() << ", " << empleados[i]->getCi() << endl;
-                }
-                for (int i = 0; i < cantEmpleados; ++i) {
-                    delete empleados[i];
-                }
-                delete[] empleados;
+                try{
+                    dtEmpleado** empleados = listarEmpleados(cantEmpleados);
+                    for (int i = 0; i < cantEmpleados; i++){
+                        cout<<"Empleado: " << empleados[i]->getNombre() << ", " << empleados[i]->getApellido() << ", " << empleados[i]->getCi() << endl;
+                    }
+                    for (int i = 0; i < cantEmpleados; ++i) {
+                        delete empleados[i];
+                    }
+                    delete[] empleados;
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
+                }    
                 pedirEnter();
                 break;
             }
@@ -106,7 +121,12 @@ int main(){
                 cin >> id;
                 cout << "Ingrese sueldo: ";
                 cin >> sueldo;
-                agregarRelacionLaboral(ci, id, sueldo);
+                try{
+                    agregarRelacionLaboral(ci, id, sueldo);
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
+                }    
                 pedirEnter();
                 break;
             }
@@ -124,7 +144,12 @@ int main(){
                 cout << "Ingrese el año actual: "<<endl;
                 cin>>a;
                 Fecha *desvinculacion=new Fecha(d,m,a);
-                finalizarRelacionLaboral(ci, id, desvinculacion);
+                try{
+                    finalizarRelacionLaboral(ci, id, desvinculacion);
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
+                }    
                 pedirEnter();
                 break;
             }
@@ -135,15 +160,19 @@ int main(){
                 cin >> ciEmpleado;
                 cout << "Cantidad de empresas a mostrar: ";
                 cin>>cantEmpresas;
-                DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
-                for (int i = 0; i < cantEmpresas; ++i) {
-                    cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
-                }
-                // BORRAR
-                for (int i = 0; i < cantEmpresas; ++i) {
-                    delete empresas[i];
-                }
-                delete[] empresas;
+                try{
+                    DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
+                    for (int i = 0; i < cantEmpresas; ++i) {
+                        cout << "Empresa: " << empresas[i]->GetId()<<", "<< empresas[i]->GetDir()<<", "<< endl;//NOSE
+                    }
+                    for (int i = 0; i < cantEmpresas; ++i) {
+                        delete empresas[i];
+                    }
+                    delete[] empresas;
+                } catch(const exception& e){
+                    cout << "\n\n\n\nError: ";
+                    std::cerr << e.what() << '\n';
+                }    
                 pedirEnter();
                 break;
             }
