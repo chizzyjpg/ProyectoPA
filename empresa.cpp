@@ -31,7 +31,7 @@ Direccion* Empresa::GetDir(){
     return this->dir;
 };
 
-float getDescuento(){
+float Empresa::getDescuento(){
     return 0;
 }
 // Destructor:
