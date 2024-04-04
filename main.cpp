@@ -20,7 +20,7 @@ void agregarRelacionLaboral(string, string, float);
 void finalizarRelacionLaboral(string, string, Fecha*);
 DtEmpresa** obtenerInfoEmpresaPorEmpleado(string, int&);
 
-
+Direccion * pedirDireccion();
 
 int main(){
     empleados[0] = NULL;
@@ -47,38 +47,15 @@ int main(){
                 cin >> nombre;
                 cout << "Ingrese Apellido: "<<endl;
                 cin >> apellido;           
-                // DIRECCION
-                cout<< "Ingrese Pais: "<<endl;
-                cin >> pais;
-                cout<< "Ingrese Ciudad: "<<endl;
-                cin >> ciud;
-                cout<< "Ingrese Calle: "<<endl;
-                cin >> calle;
-                cout<< "Ingrese Numero: "<<endl;
-                cin >> numero;
-                Direccion *dir=new Direccion(pais,ciud,calle,numero);
+                Direccion *dir = pedirDireccion();
                 agregarEmpleado(ci, nombre, apellido, dir);
                 break;
             }
             case 2: {
                 string id;
-                Direccion *dir;
                 cout << "Ingrese id de la empresa: ";
                 cin >> id;
-                // DIRECCION
-                string pais;
-                cout<< "Ingrese Pais: "<<endl;
-                cin >> pais;
-                string ciud;
-                cout<< "Ingrese Ciudad: "<<endl;
-                cin >> ciud;
-                string calle;
-                cout<< "Ingrese Calle: "<<endl;
-                cin >> calle;
-                string numero;
-                cout<< "Ingrese Numero: "<<endl;
-                cin >> numero;
-                dir = new Direccion(pais,ciud,calle,numero);
+                Direccion* dir = pedirDireccion();
                 //HACER PARA NACIONAL O EXTRANJERA
                 string expression="0";
                 DtEmpresa *nuevaEmpresa;
@@ -360,13 +337,6 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
     for (int j = 0; j < cantEmpresas && empleados[numEmpleado]->getRel(j) != NULL; j++){
         if(empleados[numEmpleado]->getRel(j)->getFechaDesvinculacion() == NULL){
             empresa = empleados[numEmpleado]->getRel(j)->getEmpresa();
-            // try {
-            //     string rutEmpresa = empresa->GetRut();
-            //     empresasEmpleado[contadorEmpresas++] = new DtNacional(empresa->GetId(), empresa->GetDir(), rutEmpresa);
-            // }catch(int e){
-            //     string nombreFantasia =empresa->GetNombre();
-            //     empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
-            // }
             Nacional * nac = (Nacional*)empresa;
             if (nac != NULL){
                 string rutEmpresa = nac->GetRut();
@@ -376,16 +346,25 @@ DtEmpresa** obtenerInfoEmpresaPorEmpleado(string ciEmpleado, int & cantEmpresas)
                 string nombreFantasia = extr->GetNombre();
                 empresasEmpleado[contadorEmpresas++] = new DtExtranjera(empresa->GetId(), empresa->GetDir(), nombreFantasia);
             }
-            // if (dynamic_cast<nacional*>(empresa) != NULL) {
-            //     string rutEmpresa = dynamic_cast<Nacional*>(empresa)->GetRut();
-            //     empresasEmpleado[contadorEmpresas++] = new Nacional(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), rutEmpresa);
-            // } 
-            // else if (dynamic_cast<Extranjera*>(empresa) != NULL) {
-            //     string nombreFantasia = dynamic_cast<Extranjera*>(empresa)->GetNombre();
-            //     empresasEmpleado[contadorEmpresas++] = new Extranjera(empleados[numEmpleado]->getRel(j)->getEmpresa()->GetId(), empleados[numEmpleado]->getRel(j)->getEmpresa()->GetDir(), nombreFantasia);
-            // }
         }
     }
     cantEmpresas = contadorEmpresas;
     return empresasEmpleado;
 };
+
+
+
+// FUNCIONES AUXILIARES
+Direccion * pedirDireccion(){
+    string pais, ciud, calle, numero;
+    cout<< "Ingrese Pais: "<<endl;
+    cin >> pais;
+    cout<< "Ingrese Ciudad: "<<endl;
+    cin >> ciud;
+    cout<< "Ingrese Calle: "<<endl;
+    cin >> calle;
+    cout<< "Ingrese Numero: "<<endl;
+    cin >> numero;
+    Direccion *dir = new Direccion(pais, ciud, calle, numero);
+    return dir;
+}
