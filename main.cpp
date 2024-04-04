@@ -1,6 +1,5 @@
 #define MAX_EMPLEADOS 100
 #define MAX_EMPRESAS 100
-// mostrar en el case 6 el rut o nombre ficticio
 #include "empresa.h"
 #include "nacional.h"
 #include "extranjera.h"
@@ -164,12 +163,10 @@ int main(){
                 cin >> m;
                 cout << "Ingrese el año actual: "<<endl;
                 cin >> a;
-                try
-                {
-                    Fecha *desvinculacion=new Fecha(d,m,a);
-                }
-                catch(const std::exception& e)
-                {
+                Fecha *desvinculacion;
+                try{
+                    desvinculacion=new Fecha(d,m,a);
+                }catch(const std::exception& e){
                     cout << "Error: ";
                     std::cerr << e.what() << '\n';
                 }
@@ -188,14 +185,12 @@ int main(){
                 int cantEmpresas;
                 cout << "Ingrese ci del empleado: ";
                 cin >> ciEmpleado;
-                cout << "Cantidad de empresas a mostrar: ";
+                cout << "Cantidad de empresas a mostrar: " << endl << endl;
                 cin>>cantEmpresas;
                 try{
                     DtEmpresa** empresas = obtenerInfoEmpresaPorEmpleado(ciEmpleado, cantEmpresas);
-                    for (int i = 0; i < cantEmpresas; i++) {
-                        cout << "Empresa: " << empresas[i]->GetId() << ", ";
-                        imprimirDireccion(empresas[i]->GetDir());
-                        cout << ", " << endl;
+                    for (int i = 0; i < cantEmpresas && empresas[i] != NULL; i++) {
+                        cout << "Empresa " << empresas[i] << ", " << endl;
                     }
                     for (int i = 0; i < cantEmpresas; ++i) {
                         delete empresas[i];

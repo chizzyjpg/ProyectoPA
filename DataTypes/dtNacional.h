@@ -3,6 +3,7 @@
 
 #include "dtEmpresa.h"
 
+
 class DtNacional: public DtEmpresa{
     public: 
         DtNacional(string Id, Direccion* Dir, string Rut);
